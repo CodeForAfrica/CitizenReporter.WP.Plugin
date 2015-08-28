@@ -3,11 +3,11 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       http://example.com
+ * @link       https://github.com/CodeForAfrica/WPCitizenReporter
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    WPCitizenReporter
+ * @subpackage WPCitizenReporter/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    WPCitizenReporter
+ * @subpackage WPCitizenReporter/includes
  * @author     Your Name <email@example.com>
  */
-class Plugin_Name_Loader {
+class WPCitizenReporter_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

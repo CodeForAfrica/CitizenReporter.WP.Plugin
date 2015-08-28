@@ -6,11 +6,11 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       http://example.com
+ * @link       https://github.com/CodeForAfrica/WPCitizenReporter
  * @since      1.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    WPCitizenReporter
+ * @subpackage WPCitizenReporter/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    WPCitizenReporter
+ * @subpackage WPCitizenReporter/includes
  * @author     Your Name <email@example.com>
  */
-class Plugin_Name_i18n {
+class WPCitizenReporter_i18n {
 
 	/**
 	 * The domain specified for this plugin.
