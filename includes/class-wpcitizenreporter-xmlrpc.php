@@ -20,17 +20,20 @@
  * @subpackage WPCitizenReporter/includes
  * @author     Nick Hargreaves <nick@codeforafrica.org>
  */
-class WPCitizenReporter_Activator {
+class WPCitizenReporter_XMLRPC {
 
 	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
+	 * Short Description.
+	 * Increases memory for XMLRPC functions
 	 * @since    1.0.0
 	 */
-	public static function activate() {
+	public function __construc(){
+		add_action('xmlrpc_methods', 'higher_mem_xlmlrpc');
+	}
 
+	public function higher_mem_xlmlrpc($methods){
+		init_set('memory_limit', '8M');
+		return $methods;
 	}
 
 }

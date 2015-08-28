@@ -19,7 +19,7 @@
  *
  * @package    WPCitizenReporter
  * @subpackage WPCitizenReporter/includes
- * @author     Your Name <email@example.com>
+ * @author     Nick Hargreaves <nick@codeforafrica.org>
  */
 class WPCitizenReporter_Loader {
 

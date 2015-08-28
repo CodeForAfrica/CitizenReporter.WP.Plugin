@@ -18,7 +18,7 @@
  *
  * @package    WPCitizenReporter
  * @subpackage WPCitizenReporter/public
- * @author     Your Name <email@example.com>
+ * @author     Nick Hargreaves <nick@codeforafrica.org>
  */
 class WPCitizenReporter_Public {
 

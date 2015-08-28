@@ -22,7 +22,7 @@
  * @since      1.0.0
  * @package    WPCitizenReporter
  * @subpackage WPCitizenReporter/includes
- * @author     Your Name <email@example.com>
+ * @author     Nick Hargreaves <nick@codeforafrica.org>
  */
 class WPCitizenReporter_i18n {
 

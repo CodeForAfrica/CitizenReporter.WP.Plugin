@@ -25,7 +25,7 @@
  * @since      1.0.0
  * @package    WPCitizenReporter
  * @subpackage WPCitizenReporter/includes
- * @author     Your Name <email@example.com>
+ * @author     Nick Hargreaves <nick@codeforafrica.org>
  */
 class WPCitizenReporter {
 
@@ -118,6 +118,11 @@ class WPCitizenReporter {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wpcitizenreporter-public.php';
+
+		/*
+		 * This is class is required for preventing memory limit errors realted to the XMLRPC functions
+		 */
+		require_once plugin_dir_path( dirnmae( __FILE__ ) ) . 'includes/class-wpcitizenreporter-xmlrpc.php';
 
 		$this->loader = new WPCitizenReporter_Loader();
 
