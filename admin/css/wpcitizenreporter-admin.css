@@ -12,3 +12,6 @@ div.col-xs-3{
 @media screen and (max-width: 1300px){
     div.col-xs-3{ width:100%}
 }
+.wrap h2{
+    display:none;
+}
