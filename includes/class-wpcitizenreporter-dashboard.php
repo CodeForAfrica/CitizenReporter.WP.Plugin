@@ -16,8 +16,6 @@
 
 class WPCitizenReporter_Dashboard {
 
-
-
 	// Custom Dashboard
 	public function summary_widget() {
 		$screen = get_current_screen();
@@ -34,33 +32,41 @@ class WPCitizenReporter_Dashboard {
 							<div class="welcom-panel-container">
 								<div class="col-xs-3">
 									<div class="tile">
-										<h3 class="tile-title">Web Oriented</h3>
-										<p>100% convertable to HTML/CSS layout.</p>
-										<a class="btn btn-primary btn-large btn-block" href="http://designmodo.com/flat">Get Pro</a>
+										<h3 class="tile-title">Stories</h3>
+										<span class="fui-new"></span>
+										<p><?php $posts = wp_count_posts();
+											print "Accepted: ". $posts->publish;
+											print " ";
+											print "Pending: ". $posts->draft;
+											?></p>
+										<a class="btn btn-primary btn-large btn-block" href="<?php print admin_url();?>edit.php">View</a>
 									</div>
 								</div>
 
 								<div class="col-xs-3">
 									<div class="tile">
-										<h3 class="tile-title">Easy to Customize</h3>
-										<p>Vector-based shapes and minimum of layer styles.</p>
-										<a class="btn btn-primary btn-large btn-block" href="http://designmodo.com/flat">Get Pro</a>
+										<h3 class="tile-title">Video</h3>
+										<span class="fui-video"></span>
+										<p><?php print $this->media_totals('video');?></p>
+										<a class="btn btn-primary btn-large btn-block" href="<?php print admin_url();?>upload.php?post_mime_type=video">View</a>
 									</div>
 								</div>
 
 								<div class="col-xs-3">
 									<div class="tile">
-										<h3 class="tile-title">Color Swatches</h3>
-										<p>Easy to add or change elements. </p>
-										<a class="btn btn-primary btn-large btn-block" href="http://designmodo.com/flat">Get Pro</a>
+										<h3 class="tile-title">Photos</h3>
+										<span class="fui-photo"></span>
+										<p><?php print $this->media_totals('image');?></p>
+										<a class="btn btn-primary btn-large btn-block" href="<?php print admin_url();?>upload.php?post_mime_type=image">View</a>
 									</div>
 								</div>
 
 								<div class="col-xs-3">
 									<div class="tile tile-hot">
-										<h3 class="tile-title">Free for Share</h3>
-										<p>Your likes, shares and comments helps us.</p>
-										<a class="btn btn-primary btn-large btn-block" href="http://designmodo.com/flat">Get Pro</a>
+										<h3 class="tile-title">Audio</h3>
+										<span class="fui-mic"></span>
+										<p><?php print $this->media_totals('audio');?></p>
+										<a class="btn btn-primary btn-large btn-block" href="<?php print admin_url();?>upload.php?post_mime_type=audio">View</a>
 									</div>
 
 								</div>
@@ -69,14 +75,6 @@ class WPCitizenReporter_Dashboard {
 
 					</div>
 				</div>
-
-				<div id="dashboard-widgets-wrap">
-
-					<?php wp_dashboard(); ?>
-
-					<div class="clear"></div>
-				</div><!-- dashboard-widgets-wrap -->
-
 			</div><!-- wrap -->
 			<?php
 		}
@@ -101,9 +99,9 @@ class WPCitizenReporter_Dashboard {
 			);
 		}
 
-		$attachments = get_posts($args);
+		$attachments = count(get_posts($args));
 
-		return $attachments;
+		return $attachments." submissions";
 	}
 
 	public function user_totals(){
