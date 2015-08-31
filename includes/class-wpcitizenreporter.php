@@ -127,19 +127,19 @@ class WPCitizenReporter {
 		/*
 		 * This file for modification of dashboard look and adding/removing widgets
 		 */
-		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpcitizenreporter-dashboard.php';
+		require_once plugin_dir_path( dirname( __FILE__ )  ) . 'includes/class-wpcitizenreporter-dashboard.php';
 		/*
 		 * For messaging features
 		 */
-		require_once plugin_dir_path( __FILE__ ) . 'includes/gcm_stuff.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/gcm_stuff.php';
 		/*
 		 * Lessons
 		 */
-		require_once plugin_dir_path( __FILE__ ) . 'includes/lessons.php';
+		require_once plugin_dir_path(  dirname( __FILE__ )  ) . 'includes/lessons.php';
 		/*
 		 * Handling payment
 		 */
-		require_once plugin_dir_path( __FILE__ ) . 'includes/payment.php';
+		require_once plugin_dir_path(  dirname( __FILE__ )  ) . 'includes/payment.php';
 
 		$this->loader = new WPCitizenReporter_Loader();
 
@@ -192,6 +192,9 @@ class WPCitizenReporter {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+		$dashboard_plugin = new WPCitizenReporter_Dashboard();
+		$this->loader->add_action('admin_notices', $dashboard_plugin, 'summary_widget');
 
 	}
 

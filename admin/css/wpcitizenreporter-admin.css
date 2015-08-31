@@ -1,0 +1,13 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+div.col-xs-3{
+    width: 20.9%;
+    min-width: 100px;
+    float: left;
+    margin: 15px;
+}
+@media screen and (max-width: 1300px){
+    div.col-xs-3{ width:100%}
+}
