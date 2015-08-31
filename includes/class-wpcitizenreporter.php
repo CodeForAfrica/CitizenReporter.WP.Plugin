@@ -122,7 +122,7 @@ class WPCitizenReporter {
 		/*
 		 * This is class is required for preventing memory limit errors realted to the XMLRPC functions
 		 */
-		require_once plugin_dir_path( dirnmae( __FILE__ ) ) . 'includes/class-wpcitizenreporter-xmlrpc.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpcitizenreporter-xmlrpc.php';
 
 		$this->loader = new WPCitizenReporter_Loader();
 
