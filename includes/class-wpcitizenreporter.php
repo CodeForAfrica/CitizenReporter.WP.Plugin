@@ -124,6 +124,23 @@ class WPCitizenReporter {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wpcitizenreporter-xmlrpc.php';
 
+		/*
+		 * This file for modification of dashboard look and adding/removing widgets
+		 */
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-wpcitizenreporter-dashboard.php';
+		/*
+		 * For messaging features
+		 */
+		require_once plugin_dir_path( __FILE__ ) . 'includes/gcm_stuff.php';
+		/*
+		 * Lessons
+		 */
+		require_once plugin_dir_path( __FILE__ ) . 'includes/lessons.php';
+		/*
+		 * Handling payment
+		 */
+		require_once plugin_dir_path( __FILE__ ) . 'includes/payment.php';
+
 		$this->loader = new WPCitizenReporter_Loader();
 
 	}

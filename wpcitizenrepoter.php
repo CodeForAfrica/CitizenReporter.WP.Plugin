@@ -48,11 +48,6 @@ register_deactivation_hook( __FILE__, 'deactivate_plugin_name' );
  * admin-specific hooks, and public-facing site hooks.
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-wpcitizenreporter.php';
-//require plugin_dir_path( __FILE__ ) . 'includes/dashboard.php';
-require plugin_dir_path( __FILE__ ) . 'includes/feedback.php';
-require plugin_dir_path( __FILE__ ) . 'includes/gcm_stuff.php';
-require plugin_dir_path( __FILE__ ) . 'includes/lessons.php';
-require plugin_dir_path( __FILE__ ) . 'includes/payment.php';
 
 /**
  * Begins execution of the plugin.
