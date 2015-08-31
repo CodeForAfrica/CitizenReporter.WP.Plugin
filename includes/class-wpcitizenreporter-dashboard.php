@@ -24,7 +24,7 @@ class WPCitizenReporter_Dashboard {
 
 			<!-- New Wrap with custom welcome screen-->
 			<div class="wrap mjp-dashboard">
-				<div id="welcome-panel" class="welcome-panel">
+				<div id="welcome-panel_custom" class="welcome-panel">
 					<?php wp_nonce_field( 'welcome-panel-nonce', 'welcomepanelnonce', false ); ?>
 					<?php //do_action( 'welcome_panel' ); ?>
 					<div class="mjp-welcome-content">

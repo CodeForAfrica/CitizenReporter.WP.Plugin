@@ -15,3 +15,6 @@ div.col-xs-3{
 .wrap h2{
     display:none;
 }
+#welcome-panel{
+    display:none;
+}
