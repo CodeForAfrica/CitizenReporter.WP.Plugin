@@ -127,6 +127,283 @@ class WPCitizenReporter_Dashboard {
 			remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');//since 3.8
 
 	}
+
+	public function add_quick_draft_assignment_dashboard_widget(){
+
+
+			wp_add_dashboard_widget(
+				'quick_draft_assignment_dashboard_widget',         // Widget slug.
+				'<span class="fui-check"></span> Quick Assignment',         // Title.
+				'quick_draft_assignment_dashboard_widget_function' // Display function.
+			);
+			function quick_draft_assignment_dashboard_widget_function() {
+				?>
+				<div class="assignment_summary">
+
+					<h3>Media Types</h3>
+					<div class="assigmnet_media_type">
+						<input type="checkbox" value="narrative" name="assignment_type[]">
+						<i class="fa fa-list-alt fa-assignment"></i>
+						Narrative
+					</div>
+				<div class="assigmnet_media_type">
+
+					<input type="checkbox" value="image" name="assignment_type[]" checked>
+					<i class="fa fa-photo fa-assignment"></i>
+					Image
+				</div>
+
+				<div class="assigmnet_media_type">
+
+					<input type="checkbox" value="audio" name="assignment_type[]">
+					<i class="fa fa-music fa-assignment"></i>
+					Audio
+				</div>
+				<div class="assigmnet_media_type">
+
+					<input type="checkbox" value="video" name="assignment_type[]">
+					<i class="fa fa-video-camera fa-assignment"></i>
+					Video
+				</div>
+				</div>
+				<div class="assigment_location">
+					<h3>Location</h3>
+					<?php
+
+				//nairobi defaults
+				$location = "-1.2920659, 36.8219462";
+
+				?>
+				<style>
+					#map-canvas {
+						height: 250px;
+					}
+					#lat_lon_input{
+
+						display:none;
+
+					}
+					#type-selector{
+						display:none;
+					}
+					.controls {
+						border: 1px solid transparent;
+						border-radius: 2px 0 0 2px;
+						box-sizing: border-box;
+						-moz-box-sizing: border-box;
+						height: 32px;
+						outline: none;
+						box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+					}
+
+					#pac-input {
+						background-color: #fff;
+						padding: 0 11px 0 13px;
+						width: 99%;
+						font-family: Roboto;
+						font-size: 15px;
+						font-weight: 300;
+						text-overflow: ellipsis;
+					}
+
+					#pac-input:focus {
+						border-color: #4d90fe;
+					}
+
+					.pac-container {
+						font-family: Roboto;
+					}
+
+					#type-selector {
+						color: #fff;
+						background-color: #4d90fe;
+						padding: 5px 11px 0px 11px;
+					}
+
+					#type-selector label {
+						font-family: Roboto;
+						font-size: 13px;
+						font-weight: 300;
+					}
+					}
+					.fa-assignment{
+						margin-right:15px;
+					}
+				</style>
+				<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+				<input type="text" id="lat_lon_input" name="lat_lon_input" value="<?php echo $location;?>" />
+
+				<script>
+					function initialize() {
+						var mapOptions = {
+							center: new google.maps.LatLng(<?php echo $location;?>),
+							zoom: 13,
+							disableDefaultUI: true,
+							mapTypeControl: false,
+							draggable: false,
+							scaleControl: false,
+							scrollwheel: false,
+							navigationControl: false,
+							streetViewControl: false,
+							mapTypeId: google.maps.MapTypeId.ROADMAP
+						};
+						var map = new google.maps.Map(document.getElementById('map-canvas'),
+							mapOptions);
+
+						var input = /** @type {HTMLInputElement} */(
+							document.getElementById('pac-input'));
+
+						var lat_lon_input = /** @type {HTMLInputElement} */(
+							document.getElementById('lat_lon_input'));
+
+						var types = document.getElementById('type-selector');
+						map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+						map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+						var autocomplete = new google.maps.places.Autocomplete(input);
+						autocomplete.bindTo('bounds', map);
+
+						var infowindow = new google.maps.InfoWindow();
+						var marker = new google.maps.Marker({
+							map: map,
+							anchorPoint: new google.maps.Point(0, -29)
+						});
+
+						google.maps.event.addListener(autocomplete, 'place_changed', function() {
+							infowindow.close();
+							marker.setVisible(false);
+							var place = autocomplete.getPlace();
+							if (!place.geometry) {
+								return;
+							}
+
+							// If the place has a geometry, then present it on a map.
+							if (place.geometry.viewport) {
+								map.fitBounds(place.geometry.viewport);
+							} else {
+								map.setCenter(place.geometry.location);
+								map.setZoom(17);  // Why 17? Because it looks good.
+							}
+							lat_lon_input.value = place.geometry.location;
+							marker.setIcon(/** @type {google.maps.Icon} */({
+								url: place.icon,
+								size: new google.maps.Size(71, 71),
+								origin: new google.maps.Point(0, 0),
+								anchor: new google.maps.Point(17, 34),
+								scaledSize: new google.maps.Size(35, 35)
+							}));
+							marker.setPosition(place.geometry.location);
+							marker.setVisible(true);
+
+							var address = '';
+							if (place.address_components) {
+								address = [
+									(place.address_components[0] && place.address_components[0].short_name || ''),
+									(place.address_components[1] && place.address_components[1].short_name || ''),
+									(place.address_components[2] && place.address_components[2].short_name || '')
+								].join(' ');
+							}
+
+							infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+							infowindow.open(map, marker);
+						});
+						//show address on info window if address is not null
+						<?php
+                            if(!empty($address)){
+                        ?>
+
+
+						show_info_window();
+
+						function show_info_window() {
+
+							var myLatlng = new google.maps.LatLng(<?php echo $location;?>);
+
+							var contentString = '';
+
+							var infowindow = new google.maps.InfoWindow({
+								content: contentString
+							});
+
+							var marker = new google.maps.Marker({
+								position: myLatlng,
+								map: map,
+								title: '<?php echo $address;?>'
+							});
+
+							google.maps.event.addListener(marker, 'click', function() {
+								infowindow.open(map,marker);
+							});
+
+						}
+						<?php
+                            }
+                        ?>
+						// Sets a listener on a radio button to change the filter type on Places
+						// Autocomplete.
+						function setupClickListener(id, types) {
+							var radioButton = document.getElementById(id);
+							google.maps.event.addDomListener(radioButton, 'click', function() {
+								autocomplete.setTypes(types);
+							});
+						}
+
+						setupClickListener('changetype-all', []);
+						setupClickListener('changetype-address', ['address']);
+						setupClickListener('changetype-establishment', ['establishment']);
+						setupClickListener('changetype-geocode', ['geocode']);
+					}
+
+					google.maps.event.addDomListener(window, 'load', initialize);
+
+				</script>
+				<input id="pac-input" class="controls" type="text" name="loc_address" value="<?php echo $address;?>"
+					   placeholder="Enter a location">
+
+				<div id="type-selector" class="controls">
+					<input type="radio" name="type" id="changetype-all" checked="checked">
+					<label for="changetype-all">All</label>
+
+					<input type="radio" name="type" id="changetype-establishment">
+					<label for="changetype-establishment">Establishments</label>
+
+					<input type="radio" name="type" id="changetype-address">
+					<label for="changetype-address">Addresses</label>
+
+					<input type="radio" name="type" id="changetype-geocode">
+					<label for="changetype-geocode">Geocodes</label>
+				</div>
+				<div id="map-canvas"></div>
+
+
+				</div>
+				<div class="assignment_target">
+					<h3>Who do you want to send the assignment to?</h3>
+					<radiogroup>
+					<input type="radio" name="type" id="changetype-all" checked="checked">
+					<label for="changetype-all">Everyone</label>
+					<br />
+					<input type="radio" name="type" id="changetype-all">
+					<label for="changetype-all">People near the specified location</label>
+					<br />
+					<input type="radio" name="type" id="changetype-all">
+					<label for="changetype-all">Specific person</label>
+					<br />
+					<input type="text" name="taget" id="assignment_target" placeholder="Enter name">
+					<br />
+					</radiogroup>
+				</div>
+				<div class="assignment_bounty">
+					<h3>How much do you want to pay for it?</h3>
+					<input type="text" id="bounty" name="bounty"  value="" placeholder="Leave blank if N/A"/>
+				</div>
+				<div class="assignment_finish">
+					<span class="fui-check-circle"></span>
+				</div>
+				<?php
+			}
+
+	}
 }
 
 

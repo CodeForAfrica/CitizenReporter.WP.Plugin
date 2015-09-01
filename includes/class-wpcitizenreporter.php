@@ -129,6 +129,11 @@ class WPCitizenReporter {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ )  ) . 'includes/class-wpcitizenreporter-dashboard.php';
 		/*
+		 * For assignments
+		 *
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/assignments.php';
+		/*
 		 * For messaging features
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/gcm_stuff.php';
@@ -198,6 +203,8 @@ class WPCitizenReporter {
 		$this->loader->add_action('admin_notices', $dashboard_plugin, 'summary_widget');
 		//remove default widgets
 		$this->loader->add_action('admin_init', $dashboard_plugin, 'remove_default_widgets');
+		//quick assignment widget
+		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'add_quick_draft_assignment_dashboard_widget' );
 	}
 
 	/**
