@@ -184,13 +184,15 @@ class WPCitizenReporter {
 
 		$dashboard_plugin = new WPCitizenReporter_Dashboard();
 		//create summary widget
-		$this->loader->add_action('admin_notices', $dashboard_plugin, 'summary_widget');
+		//$this->loader->add_action('admin_notices', $dashboard_plugin, 'summary_widget');
 		//remove default widgets
 		$this->loader->add_action('admin_init', $dashboard_plugin, 'remove_default_widgets');
 		//quick assignment widget
 		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'add_quick_draft_assignment_dashboard_widget' );
 		//latest media widget
 		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'latest_media_dashboard_widget' );
+		//active assignments
+		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'active_assignments_dashboard_widget' );
 
 	}
 

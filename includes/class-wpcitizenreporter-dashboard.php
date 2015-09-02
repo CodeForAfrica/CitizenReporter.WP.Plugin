@@ -67,6 +67,42 @@ class WPCitizenReporter_Dashboard {
 			remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');//since 3.8
 
 	}
+	public function active_assignments_dashboard_widget(){
+
+
+		wp_add_dashboard_widget(
+			'active_assignments_dashboard_widget',         // Widget slug.
+			'Active Assignments',         // Title.
+			'active_assignments_dashboard_widget_function' // Display function.
+		);
+		function active_assignments_dashboard_widget_function() {
+			?>
+			<table>
+				<tbody><tr>
+					<th>One</th>
+					<th>Two</th>
+					<th>Three</th>
+				</tr>
+				<tr>
+					<td>Apples</td>
+					<td>Carrots</td>
+					<td>Steak</td>
+				</tr>
+				<tr>
+					<td>Oranges</td>
+					<td>Potato</td>
+					<td>Pork</td>
+				</tr>
+				<tr>
+					<td>Pears</td>
+					<td>Peas</td>
+					<td>Chicken</td>
+				</tr>
+				</tbody></table>
+			<?php
+
+		}
+	}
 	public function latest_media_dashboard_widget(){
 
 
