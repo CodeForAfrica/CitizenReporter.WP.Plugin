@@ -94,3 +94,14 @@ h3.hndle.ui-sortable-handle {
 .fa-assignment{
     margin-right:15px;
 }
+
+/*
+    Media gallery widget
+*/
+#latest-media-thumbnials{
+    width: 455px;
+}
+#latest-media-thumbnials img{
+    width: 150px;
+    height: 150px;
+}

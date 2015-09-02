@@ -16,15 +16,18 @@
 
 class WPCitizenReporter_Dashboard {
 
+
+
 	// Custom Dashboard
 	public function summary_widget() {
 		$screen = get_current_screen();
 		if( $screen->base == 'dashboard' ) {
-			?>
 
+			?>
 			<!-- New Wrap with custom welcome screen-->
 			<div class="wrap mjp-dashboard">
 				<div id="welcome-panel_custom" class="welcome-panel">
+
 					<?php wp_nonce_field( 'welcome-panel-nonce', 'welcomepanelnonce', false ); ?>
 					<?php //do_action( 'welcome_panel' ); ?>
 					<div class="mjp-welcome-content">
@@ -127,8 +130,44 @@ class WPCitizenReporter_Dashboard {
 			remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');//since 3.8
 
 	}
+	public function latest_media_dashboard_widget(){
 
 
+		wp_add_dashboard_widget(
+			'latest_media_dashboard_widget',         // Widget slug.
+			'Latest Media',         // Title.
+			'latest_media_dashboard_widget_function' // Display function.
+		);
+		function latest_media_dashboard_widget_function() {
+			?>
+			<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.3/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+			<script src="//code.jquery.com/jquery-latest.js"></script>
+			<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.3/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+			<div id="latest-media-thumbnials">
+				<a href="img/img1.jpg"  data-featherlight="http://sachinchoolur.github.io/lightGallery/static/img/1.jpg">
+					<img src="http://sachinchoolur.github.io/lightGallery/static/img/1.jpg"/>
+				</a>
+				<a href="img/img2.jpg">
+					<img src="http://sachinchoolur.github.io/lightGallery/static/img/2.jpg"/>
+				</a>
+				<a href="img/img2.jpg">
+					<img src="http://sachinchoolur.github.io/lightGallery/static/img/2.jpg"/>
+				</a>
+				<a href="img/img1.jpg"  data-featherlight="http://sachinchoolur.github.io/lightGallery/static/img/1.jpg">
+					<img src="http://sachinchoolur.github.io/lightGallery/static/img/1.jpg"/>
+				</a>
+				<a href="img/img2.jpg">
+					<img src="http://sachinchoolur.github.io/lightGallery/static/img/2.jpg"/>
+				</a>
+				<a href="img/img2.jpg">
+					<img src="http://sachinchoolur.github.io/lightGallery/static/img/2.jpg"/>
+				</a>
+			</div>
+
+			<?php
+			}
+	}
 
 	public function add_quick_draft_assignment_dashboard_widget(){
 

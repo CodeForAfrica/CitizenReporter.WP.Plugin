@@ -182,6 +182,16 @@ class WPCitizenReporter {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		$dashboard_plugin = new WPCitizenReporter_Dashboard();
+		//create summary widget
+		$this->loader->add_action('admin_notices', $dashboard_plugin, 'summary_widget');
+		//remove default widgets
+		$this->loader->add_action('admin_init', $dashboard_plugin, 'remove_default_widgets');
+		//quick assignment widget
+		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'add_quick_draft_assignment_dashboard_widget' );
+		//latest media widget
+		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'latest_media_dashboard_widget' );
+
 	}
 
 	/**
@@ -198,14 +208,7 @@ class WPCitizenReporter {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
-		$dashboard_plugin = new WPCitizenReporter_Dashboard();
-		//create summary widget
-		$this->loader->add_action('admin_notices', $dashboard_plugin, 'summary_widget');
-		//remove default widgets
-		$this->loader->add_action('admin_init', $dashboard_plugin, 'remove_default_widgets');
-		//quick assignment widget
-		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'add_quick_draft_assignment_dashboard_widget' );
-	}
+			}
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
