@@ -33,46 +33,7 @@ class WPCitizenReporter_Dashboard {
 					<div class="mjp-welcome-content">
 						<div class="welcome-panel-column-container">
 							<div class="welcom-panel-container">
-								<div class="col-xs-3">
-									<div class="tile">
-										<h3 class="tile-title">Stories</h3>
-										<span class="fui-new"></span>
-										<p><?php $posts = wp_count_posts();
-											print "Accepted: ". $posts->publish;
-											print " ";
-											print "Pending: ". $posts->draft;
-											?></p>
-										<a class="btn btn-primary btn-large btn-block" href="<?php print admin_url();?>edit.php">View</a>
-									</div>
-								</div>
 
-								<div class="col-xs-3">
-									<div class="tile">
-										<h3 class="tile-title">Video</h3>
-										<span class="fui-video"></span>
-										<p><?php print $this->media_totals('video');?></p>
-										<a class="btn btn-primary btn-large btn-block" href="<?php print admin_url();?>upload.php?post_mime_type=video">View</a>
-									</div>
-								</div>
-
-								<div class="col-xs-3">
-									<div class="tile">
-										<h3 class="tile-title">Photos</h3>
-										<span class="fui-photo"></span>
-										<p><?php print $this->media_totals('image');?></p>
-										<a class="btn btn-primary btn-large btn-block" href="<?php print admin_url();?>upload.php?post_mime_type=image">View</a>
-									</div>
-								</div>
-
-								<div class="col-xs-3">
-									<div class="tile tile-hot">
-										<h3 class="tile-title">Audio</h3>
-										<span class="fui-mic"></span>
-										<p><?php print $this->media_totals('audio');?></p>
-										<a class="btn btn-primary btn-large btn-block" href="<?php print admin_url();?>upload.php?post_mime_type=audio">View</a>
-									</div>
-
-								</div>
 							</div>
 						</div>
 
@@ -81,30 +42,6 @@ class WPCitizenReporter_Dashboard {
 			</div><!-- wrap -->
 			<?php
 		}
-	}
-
-	public function media_totals($mediaType){
-
-		if($mediaType==null){
-			$args = array(
-				'post_type' => 'attachment',
-				'numberposts' => -1,
-				'post_status' => null,
-				'post_parent' => null,
-			);
-		}else{
-			$args = array(
-				'post_type' => 'attachment',
-				'numberposts' => -1,
-				'post_status' => null,
-				'post_parent' => null,
-				'post_mime_type' => $mediaType,
-			);
-		}
-
-		$attachments = count(get_posts($args));
-
-		return $attachments." submissions";
 	}
 
 	public function user_totals(){
@@ -164,9 +101,45 @@ class WPCitizenReporter_Dashboard {
 					<img src="http://sachinchoolur.github.io/lightGallery/static/img/2.jpg"/>
 				</a>
 			</div>
+			<div class="media-totals">
+				<div id="media-totals-top">
+					<?php $posts = wp_count_posts();
+					?>
+					<a href="<?php print admin_url();?>edit.php" class="media-btn btn btn-block btn-inverse"><span class="fui-new"></span><?php print $posts->publish;?> Stories</a>
+					<a href="<?php print admin_url();?>upload.php?post_mime_type=video" class="media-btn btn btn-block btn-warning"><span class="fui-video"></span><?php print media_totals('video');?></a>
+				</div>
+				<div id="media-totals-bottom">
+					<a href="<?php print admin_url();?>upload.php?post_mime_type=image" class="media-btn btn btn-block btn-danger"><span class="fui-image"></span><?php print media_totals('video');?></a>
+					<a href="<?php print admin_url();?>upload.php?post_mime_type=audio" class="media-btn btn btn-block btn-info"><span class="fui-mic"></span><?php print media_totals('video');?></a>
+				</div>
+
+			</div>
 
 			<?php
 			}
+			function media_totals($mediaType){
+
+			if($mediaType==null){
+				$args = array(
+					'post_type' => 'attachment',
+					'numberposts' => -1,
+					'post_status' => null,
+					'post_parent' => null,
+				);
+			}else{
+				$args = array(
+					'post_type' => 'attachment',
+					'numberposts' => -1,
+					'post_status' => null,
+					'post_parent' => null,
+					'post_mime_type' => $mediaType,
+				);
+			}
+
+			$attachments = count(get_posts($args));
+
+			return $attachments." submissions";
+		}
 	}
 
 	public function add_quick_draft_assignment_dashboard_widget(){

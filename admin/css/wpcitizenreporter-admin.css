@@ -2,16 +2,25 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
-div.col-xs-3{
-    width: 20.9%;
-    min-width: 100px;
-    float: left;
-    margin: 15px;
-    height: 200px;
+.media-totals{
+    text-align: center;
 }
+
+.media-btn{
+    margin: 10px;
+    display:inline-block;
+    width:150px;
+    min-height: 30px !important;
+}
+div.tile{
+    float: left;
+    width: 200px
+}
+
 @media screen and (max-width: 1300px){
     div.col-xs-3{ width:100%}
 }
+
 .wrap h2{
     display:none;
 }
