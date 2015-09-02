@@ -33,3 +33,6 @@ input[type=text], textarea{
 .quick_assignment textarea{
     height: 100px;
 }
+h3.hndle.ui-sortable-handle {
+    font-size: 1.3em;
+}

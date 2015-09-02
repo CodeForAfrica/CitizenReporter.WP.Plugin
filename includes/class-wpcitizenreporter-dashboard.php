@@ -133,7 +133,7 @@ class WPCitizenReporter_Dashboard {
 
 			wp_add_dashboard_widget(
 				'quick_draft_assignment_dashboard_widget',         // Widget slug.
-				'<span class="fui-check"></span> Create Assignment',         // Title.
+				'Create Assignment',         // Title.
 				'quick_draft_assignment_dashboard_widget_function' // Display function.
 			);
 			function quick_draft_assignment_dashboard_widget_function() {
