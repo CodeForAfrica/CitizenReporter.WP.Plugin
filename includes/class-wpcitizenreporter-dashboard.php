@@ -133,12 +133,17 @@ class WPCitizenReporter_Dashboard {
 
 			wp_add_dashboard_widget(
 				'quick_draft_assignment_dashboard_widget',         // Widget slug.
-				'<span class="fui-check"></span> Quick Assignment',         // Title.
+				'<span class="fui-check"></span> Create Assignment',         // Title.
 				'quick_draft_assignment_dashboard_widget_function' // Display function.
 			);
 			function quick_draft_assignment_dashboard_widget_function() {
 				?>
+				
+				<div class="quick_assignment">
+					<h2>Create Assignment</h2>
 				<div class="assignment_summary">
+					<input type="text" placeholder="Title">
+					<textarea placeholder="Description"></textarea>
 
 					<h3>Media Types</h3>
 					<div class="assigmnet_media_type">
@@ -378,27 +383,28 @@ class WPCitizenReporter_Dashboard {
 
 				</div>
 				<div class="assignment_target">
-					<h3>Who do you want to send the assignment to?</h3>
+					<h3>To whom do you want to send the assignment to?</h3>
 					<radiogroup>
 					<input type="radio" name="type" id="changetype-all" checked="checked">
 					<label for="changetype-all">Everyone</label>
-					<br />
+
 					<input type="radio" name="type" id="changetype-all">
 					<label for="changetype-all">People near the specified location</label>
 					<br />
 					<input type="radio" name="type" id="changetype-all">
 					<label for="changetype-all">Specific person</label>
-					<br />
+
 					<input type="text" name="taget" id="assignment_target" placeholder="Enter name">
-					<br />
+
 					</radiogroup>
 				</div>
 				<div class="assignment_bounty">
-					<h3>How much do you want to pay for it?</h3>
-					<input type="text" id="bounty" name="bounty"  value="" placeholder="Leave blank if N/A"/>
+					<h3>Bounty</h3>
+					<input type="text" id="bounty" name="bounty"  value="" placeholder="How much do you want to pay for it?"/>
 				</div>
 				<div class="assignment_finish">
-					<span class="fui-check-circle"></span>
+					<input type="submit" name="save" class="button button-primary" value="Create assignment">
+				</div>
 				</div>
 				<?php
 			}
