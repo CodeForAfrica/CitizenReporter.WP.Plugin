@@ -128,6 +128,8 @@ class WPCitizenReporter_Dashboard {
 
 	}
 
+
+
 	public function add_quick_draft_assignment_dashboard_widget(){
 
 
