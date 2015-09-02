@@ -179,62 +179,6 @@ class WPCitizenReporter_Dashboard {
 				$location = "-1.2920659, 36.8219462";
 
 				?>
-				<style>
-					#map-canvas {
-						height: 250px;
-					}
-					#lat_lon_input{
-
-						display:none;
-
-					}
-					#type-selector{
-						display:none;
-					}
-					.controls {
-						border: 1px solid transparent;
-						border-radius: 2px 0 0 2px;
-						box-sizing: border-box;
-						-moz-box-sizing: border-box;
-						height: 32px;
-						outline: none;
-						box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-					}
-
-					#pac-input {
-						background-color: #fff;
-						padding: 0 11px 0 13px;
-						width: 99%;
-						font-family: Roboto;
-						font-size: 15px;
-						font-weight: 300;
-						text-overflow: ellipsis;
-					}
-
-					#pac-input:focus {
-						border-color: #4d90fe;
-					}
-
-					.pac-container {
-						font-family: Roboto;
-					}
-
-					#type-selector {
-						color: #fff;
-						background-color: #4d90fe;
-						padding: 5px 11px 0px 11px;
-					}
-
-					#type-selector label {
-						font-family: Roboto;
-						font-size: 13px;
-						font-weight: 300;
-					}
-					}
-					.fa-assignment{
-						margin-right:15px;
-					}
-				</style>
 				<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 				<input type="text" id="lat_lon_input" name="lat_lon_input" value="<?php echo $location;?>" />
 
