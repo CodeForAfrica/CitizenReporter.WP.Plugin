@@ -7,10 +7,9 @@
 }
 
 .media-btn{
-    margin: 10px;
     display:inline-block;
-    width:150px;
-    min-height: 30px !important;
+    width:50px;
+    min-height: 20px !important;
 }
 div.tile{
     float: left;
@@ -147,4 +146,4 @@ tr:nth-child(even) td { background: #F1F1F1; }
 /* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
 tr:nth-child(odd) td { background: #FEFEFE; }
 
-tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
+tr:hover { background: #666; color: #FFF; } /* Hover cell effect! */

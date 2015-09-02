@@ -193,6 +193,8 @@ class WPCitizenReporter {
 		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'latest_media_dashboard_widget' );
 		//active assignments
 		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'active_assignments_dashboard_widget' );
+		//quick chat widget
+		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'quick_chat_dashboard_widget' );
 
 	}
 

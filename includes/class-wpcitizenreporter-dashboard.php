@@ -67,6 +67,21 @@ class WPCitizenReporter_Dashboard {
 			remove_meta_box( 'dashboard_activity', 'dashboard', 'normal');//since 3.8
 
 	}
+	public function quick_chat_dashboard_widget()
+	{
+
+
+		wp_add_dashboard_widget(
+			'quick_chat_dashboard_widget',         // Widget slug.
+			'Messaging',         // Title.
+			'quick_chat_dashboard_widget_function' // Display function.
+		);
+		function quick_chat_dashboard_widget_function()
+		{
+
+		}
+
+	}
 	public function active_assignments_dashboard_widget(){
 
 
@@ -79,24 +94,24 @@ class WPCitizenReporter_Dashboard {
 			?>
 			<table>
 				<tbody><tr>
-					<th>One</th>
-					<th>Two</th>
-					<th>Three</th>
+					<th>Assignment</th>
+					<th>Status</th>
+					<th>Responses</th>
 				</tr>
 				<tr>
 					<td>Apples</td>
 					<td>Carrots</td>
-					<td>Steak</td>
+					<td>0</td>
 				</tr>
 				<tr>
 					<td>Oranges</td>
 					<td>Potato</td>
-					<td>Pork</td>
+					<td>12</td>
 				</tr>
 				<tr>
 					<td>Pears</td>
 					<td>Peas</td>
-					<td>Chicken</td>
+					<td>7</td>
 				</tr>
 				</tbody></table>
 			<?php
@@ -138,16 +153,13 @@ class WPCitizenReporter_Dashboard {
 				</a>
 			</div>
 			<div class="media-totals">
-				<div id="media-totals-top">
 					<?php $posts = wp_count_posts();
 					?>
-					<a href="<?php print admin_url();?>edit.php" class="media-btn btn btn-block btn-inverse"><span class="fui-new"></span><?php print $posts->publish;?> Stories</a>
+					<a href="<?php print admin_url();?>edit.php" class="media-btn btn btn-block btn-inverse"><span class="fui-new"></span><?php print $posts->publish;?></a>
 					<a href="<?php print admin_url();?>upload.php?post_mime_type=video" class="media-btn btn btn-block btn-warning"><span class="fui-video"></span><?php print media_totals('video');?></a>
-				</div>
-				<div id="media-totals-bottom">
+
 					<a href="<?php print admin_url();?>upload.php?post_mime_type=image" class="media-btn btn btn-block btn-danger"><span class="fui-image"></span><?php print media_totals('video');?></a>
 					<a href="<?php print admin_url();?>upload.php?post_mime_type=audio" class="media-btn btn btn-block btn-info"><span class="fui-mic"></span><?php print media_totals('video');?></a>
-				</div>
 
 			</div>
 
@@ -174,7 +186,7 @@ class WPCitizenReporter_Dashboard {
 
 			$attachments = count(get_posts($args));
 
-			return $attachments." submissions";
+			return $attachments;
 		}
 	}
 
