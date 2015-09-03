@@ -134,10 +134,6 @@ class WPCitizenReporter {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/assignments.php';
 		/*
-		 * For messaging features
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/gcm_stuff.php';
-		/*
 		 * Lessons
 		 */
 		require_once plugin_dir_path(  dirname( __FILE__ )  ) . 'includes/lessons.php';
