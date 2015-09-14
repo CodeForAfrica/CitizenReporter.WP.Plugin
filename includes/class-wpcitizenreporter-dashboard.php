@@ -115,7 +115,7 @@ class WPCitizenReporter_Dashboard {
 					<th scope="col" class="nobg">Assignments</th>
 					<th scope="col">Deadline</th>
 					<th scope="col">Responses</th>
-				</tr>'
+				</tr>
 				<?php
 					foreach($assignments as $assignment){
 						//find total responses
@@ -126,13 +126,28 @@ class WPCitizenReporter_Dashboard {
 						);
 						$responses = count(query_posts( $args ));
 
-						//find due date
-						$deadline = get_post_meta($assignment->ID, "assignment_date", true);
+						//find due date & set color code
+						$assignment_date = get_post_meta($assignment->ID, "assignment_date", true);
+						$deadline = strtotime($assignment_date);
+						$today = strtotime(date('Y-m-d'));
+
+						if($deadline==$today){
+							$btn = " btn-danger";
+						}else if($deadline<$today){
+							//deadline has passed
+							$btn = " btn-default";
+						}else if($deadline < strtotime('+1 week')){
+							$btn = " btn-warning";
+						}else{
+							//deadline is way in the future
+							$btn =" btn-primary";
+						}
+
 
 						//color code due date
 						print '<tr>
 									<th scope="row" class="spec">'.$assignment->post_title.'</th>
-									<td>'.$deadline.'</td>
+									<td><button class="assign-btn btn btn-xs'.$btn.'">'.$assignment_date.'</button></td>
 									<td>'.$responses.'</td>
 								</tr>';
 
