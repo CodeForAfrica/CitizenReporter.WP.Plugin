@@ -73,10 +73,10 @@ class WPCitizenReporter_Dashboard {
 
 		wp_add_dashboard_widget(
 			'quick_chat_dashboard_widget',         // Widget slug.
-			'Messaging',         // Title.
-			'quick_chat_dashboard_widget_function' // Display function.
+			'Payments',         // Title.
+			'payments_dashboard_widget_function' // Display function.
 		);
-		function quick_chat_dashboard_widget_function()
+		function payments_dashboard_widget_function()
 		{
 
 		}
@@ -92,26 +92,31 @@ class WPCitizenReporter_Dashboard {
 		);
 		function active_assignments_dashboard_widget_function() {
 			?>
-			<table>
+			<table id="active_assignments" cellspacing="0" summary="Active assignments">
+				<caption></caption>
 				<tbody><tr>
-					<th>Assignment</th>
-					<th>Status</th>
-					<th>Responses</th>
+					<th scope="col" class="nobg">Assignments</th>
+					<th scope="col">Title</th>
+					<th scope="col">Status</th>
+					<th scope="col">Responses</th>
 				</tr>
 				<tr>
-					<td>Apples</td>
-					<td>Carrots</td>
-					<td>0</td>
+					<th scope="row" class="spec">Model</th>
+					<td>M9454LL/A</td>
+					<td>M9455LL/A</td>
+					<td>M9457LL/A</td>
 				</tr>
 				<tr>
-					<td>Oranges</td>
-					<td>Potato</td>
-					<td>12</td>
+					<th scope="row" class="spec">Model</th>
+					<td>M9454LL/A</td>
+					<td>M9455LL/A</td>
+					<td>M9457LL/A</td>
 				</tr>
 				<tr>
-					<td>Pears</td>
-					<td>Peas</td>
-					<td>7</td>
+					<th scope="row" class="spec">Model</th>
+					<td>M9454LL/A</td>
+					<td>M9455LL/A</td>
+					<td>M9457LL/A</td>
 				</tr>
 				</tbody></table>
 			<?php
