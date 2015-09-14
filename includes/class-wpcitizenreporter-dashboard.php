@@ -91,33 +91,54 @@ class WPCitizenReporter_Dashboard {
 			'active_assignments_dashboard_widget_function' // Display function.
 		);
 		function active_assignments_dashboard_widget_function() {
+			$args = array(
+				'posts_per_page'   => 500000,
+				'offset'           => 0,
+				'category'         => '',
+				'category_name'    => '',
+				'orderby'          => 'date',
+				'order'            => 'DESC',
+				'include'          => '',
+				'exclude'          => '',
+				'post_type'        => 'assignment',
+				'post_mime_type'   => '',
+				'post_parent'      => '',
+				'post_status'      => 'published',
+				'suppress_filters' => true
+			);
+			$assignments = get_posts($args);
 			?>
 			<table id="active_assignments" cellspacing="0" summary="Active assignments">
 				<caption></caption>
-				<tbody><tr>
+				<tbody>
+				<tr>
 					<th scope="col" class="nobg">Assignments</th>
-					<th scope="col">Title</th>
-					<th scope="col">Status</th>
+					<th scope="col">Deadline</th>
 					<th scope="col">Responses</th>
-				</tr>
-				<tr>
-					<th scope="row" class="spec">Model</th>
-					<td>M9454LL/A</td>
-					<td>M9455LL/A</td>
-					<td>M9457LL/A</td>
-				</tr>
-				<tr>
-					<th scope="row" class="spec">Model</th>
-					<td>M9454LL/A</td>
-					<td>M9455LL/A</td>
-					<td>M9457LL/A</td>
-				</tr>
-				<tr>
-					<th scope="row" class="spec">Model</th>
-					<td>M9454LL/A</td>
-					<td>M9455LL/A</td>
-					<td>M9457LL/A</td>
-				</tr>
+				</tr>'
+				<?php
+					foreach($assignments as $assignment){
+						//find total responses
+						$args = array(
+							'post_type' => 'post',
+							'meta_key' => 'assignment_id',
+							'meta_value' => $assignment->ID
+						);
+						$responses = count(query_posts( $args ));
+
+						//find due date
+						$deadline = get_post_meta($assignment->ID, "assignment_date", true);
+
+						//color code due date
+						print '<tr>
+									<th scope="row" class="spec">'.$assignment->post_title.'</th>
+									<td>'.$deadline.'</td>
+									<td>'.$responses.'</td>
+								</tr>';
+
+						}
+				?>
+
 				</tbody></table>
 			<?php
 

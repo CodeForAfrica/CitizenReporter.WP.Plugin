@@ -116,6 +116,9 @@ h3.hndle.ui-sortable-handle {
 /*
     Active assignments table
     */
+#active_assignments{
+    width: 100%;
+}
 #active_assignments th {
     font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,
     sans-serif;
