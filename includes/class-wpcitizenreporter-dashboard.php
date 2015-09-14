@@ -108,6 +108,13 @@ class WPCitizenReporter_Dashboard {
 			);
 			$assignments = get_posts($args);
 			?>
+			<script>
+				jQuery(document).ready(function($) {
+					$(".edit_assignment").click(function() {
+						window.document.location = "post.php?post=" + $(this).data("href") + "&action=edit";
+					});
+				});
+			</script>
 			<table id="active_assignments" cellspacing="0" summary="Active assignments">
 				<caption></caption>
 				<tbody>
@@ -145,7 +152,7 @@ class WPCitizenReporter_Dashboard {
 
 
 						//color code due date
-						print '<tr>
+						print '<tr class="edit_assignment" data-href="'.$assignment->ID.'">
 									<th scope="row" class="spec">'.$assignment->post_title.'</th>
 									<td><button class="assign-btn btn btn-xs'.$btn.'">'.$assignment_date.'</button></td>
 									<td>'.$responses.'</td>

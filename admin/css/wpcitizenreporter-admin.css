@@ -119,6 +119,9 @@ h3.hndle.ui-sortable-handle {
 #active_assignments{
     width: 100%;
 }
+#active_assignments tr{
+    cursor: pointer;
+}
 #active_assignments th {
     font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,
     sans-serif;
@@ -127,7 +130,6 @@ h3.hndle.ui-sortable-handle {
     border-bottom: 1px solid #C1DAD7;
     border-top: 1px solid #C1DAD7;
     letter-spacing: 2px;
-    text-transform: uppercase;
     text-align: left;
     padding: 6px 6px 6px 12px;
     background: #CAE8EA;
