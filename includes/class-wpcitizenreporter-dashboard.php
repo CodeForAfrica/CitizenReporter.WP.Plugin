@@ -245,27 +245,29 @@ class WPCitizenReporter_Dashboard {
 			<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.3/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 			<script src="//code.jquery.com/jquery-latest.js"></script>
 			<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.3/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-
 			<div id="latest-media-thumbnials">
-				<a href="img/img1.jpg"  data-featherlight="http://sachinchoolur.github.io/lightGallery/static/img/1.jpg">
-					<img src="http://sachinchoolur.github.io/lightGallery/static/img/1.jpg"/>
-				</a>
-				<a href="img/img2.jpg">
-					<img src="http://sachinchoolur.github.io/lightGallery/static/img/2.jpg"/>
-				</a>
-				<a href="img/img2.jpg">
-					<img src="http://sachinchoolur.github.io/lightGallery/static/img/2.jpg"/>
-				</a>
-				<a href="img/img1.jpg"  data-featherlight="http://sachinchoolur.github.io/lightGallery/static/img/1.jpg">
-					<img src="http://sachinchoolur.github.io/lightGallery/static/img/1.jpg"/>
-				</a>
-				<a href="img/img2.jpg">
-					<img src="http://sachinchoolur.github.io/lightGallery/static/img/2.jpg"/>
-				</a>
-				<a href="img/img2.jpg">
-					<img src="http://sachinchoolur.github.io/lightGallery/static/img/2.jpg"/>
-				</a>
+			<?php
+				$args = array(
+					'post_type' => 'attachment',
+					'numberposts' => -1,
+					'post_status' => null,
+					'post_parent' => null,
+				);
+				$media = get_posts($args);
+
+				foreach($media as $m){
+
+					if(strpos($m->post_mime_type, "image") !==false) {
+						print '<a href=""  data-featherlight="' . $m->guid . '">
+							<img src="' . $m->guid . '"/>
+						</a>';
+					}else if(strpos($m->post_mime_type, "audio") !==false) {
+						print "<div class='show_audio_thumb'>".do_shortcode("[audio mp3='".$m->guid."'][/audio]")."</div>";
+					}
+				}
+			?>
 			</div>
+
 			<div class="media-totals">
 					<?php $posts = wp_count_posts();
 					?>

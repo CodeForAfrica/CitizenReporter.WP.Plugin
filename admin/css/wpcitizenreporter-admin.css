@@ -144,3 +144,10 @@ h3.hndle.ui-sortable-handle {
 .assign-btn{
     min-height: 0px !important;
 }
+.show_audio_thumb{
+    display: inline-block;
+    width: 150px !important;
+    height: 80px;
+    background-color: #000;
+    padding-top: 70px;
+}
