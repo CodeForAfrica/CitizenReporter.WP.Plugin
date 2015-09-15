@@ -97,7 +97,7 @@
 						$('.quick_assignment_form_check').prop('checked', false);
 
 						//restore defaults
-						$('.default_check').prop('checked', false);
+						$('.default_check').prop('checked', true);
 						$('#assignment_target_person').hide();
 
 					}else if(data == 0){
@@ -107,6 +107,11 @@
 					}
 
 					jQuery("#assignment_created").html(output);
+
+					//fade out response message after 2 seconds
+					setTimeout(function(){
+						$("#assignment_created").fadeOut("slow");
+					},2000)
 			});
 
 		});
