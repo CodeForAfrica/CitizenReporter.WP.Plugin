@@ -28,5 +28,16 @@
 	 * for any particular page. Though other scripts in WordPress core, other plugins, and other themes may
 	 * be doing this, we should try to minimize doing that in our own work.
 	 */
+	$(document).ready(function($) {
+		$('#target_person').hide();
+		$('#target_radio').change(function() {
+			var selected_value = $("input[name='target_radio_type']:checked").val();
+			if(selected_value == "specific"){
+				$('#target_person').show();
+			}else{
+				$('#target_person').hide();
+			}
+		});
+	});
 
 })( jQuery );
