@@ -88,9 +88,18 @@
 					var output = "";
 
 					if(data == 1){
+
 						output = "Assignment created successfully!"
 						//now clear the input boxes
 						$(".quick_assignment_form").val("");
+
+						//clear assignment checkboxes
+						$('.quick_assignment_form_check').prop('checked', false);
+
+						//restore defaults
+						$('.default_check').prop('checked', false);
+
+
 					}else if(data == 0){
 						output = "Problem creating assignment! Do you have the right permissions?";
 					}else{
