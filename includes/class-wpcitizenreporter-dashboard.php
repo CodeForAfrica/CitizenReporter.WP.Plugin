@@ -318,8 +318,8 @@ class WPCitizenReporter_Dashboard {
 				<div class="quick_assignment">
 					<h2>Create Assignment</h2>
 				<div class="assignment_summary">
-					<input type="text" placeholder="Title" id="assignment_title">
-					<textarea placeholder="Description" id="assignment_description"></textarea>
+					<input type="text" placeholder="Title" id="assignment_title" class="quick_assignment_form">
+					<textarea placeholder="Description" id="assignment_description" class="quick_assignment_form"></textarea>
 
 					<h3>Media Types</h3>
 					<div class="assigmnet_media_type">
@@ -356,7 +356,7 @@ class WPCitizenReporter_Dashboard {
 
 				?>
 				<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
-				<input type="text" id="lat_lon_input" name="lat_lon_input" value="<?php echo $location;?>" />
+				<input type="text" id="lat_lon_input" name="lat_lon_input" value="<?php echo $location;?>" class="quick_assignment_form"/>
 
 				<script>
 					function initialize() {
@@ -482,7 +482,7 @@ class WPCitizenReporter_Dashboard {
 					google.maps.event.addDomListener(window, 'load', initialize);
 
 				</script>
-				<input id="loc_address" class="controls" type="text" name="loc_address" placeholder="Enter a location">
+				<input id="loc_address" class="quick_assignment_form controls" type="text" name="loc_address" placeholder="Enter a location">
 
 				<div id="type-selector" class="controls">
 					<input type="radio" name="type" id="changetype-all" checked="checked">
@@ -531,11 +531,11 @@ class WPCitizenReporter_Dashboard {
 				</div>
 				<div class="assignment_input_group">
 					<h3>Deadline</h3>
-					<input type="date" id="assignment_date" name="assignment_date" placeholder="Deadline"/>
+					<input type="date" id="assignment_date" name="assignment_date" placeholder="Deadline" class="quick_assignment_form"/>
 				</div>
 				<div class="assignment_input_group">
 					<h3>Bounty</h3>
-					<input type="text" id="assignment_bounty" name="bounty"  value="" placeholder="How much do you want to pay for it?"/>
+					<input type="text" id="assignment_bounty" name="bounty"  value="" placeholder="How much do you want to pay for it?" class="quick_assignment_form"/>
 				</div>
 				<div class="assignment_finish">
 					<input id="create_assignment" type="submit" name="save" class="button button-primary" value="Create assignment">

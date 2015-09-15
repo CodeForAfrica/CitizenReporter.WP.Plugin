@@ -87,9 +87,11 @@
 				.done(function( data ) {
 					var output = "";
 
-					if(data == 0){
+					if(data == 1){
 						output = "Assignment created successfully!"
-					}else if(data == 1){
+						//now clear the input boxes
+						$(".quick_assignment_form").val("");
+					}else if(data == 0){
 						output = "Problem creating assignment! Do you have the right permissions?";
 					}else{
 						output = "You are not logged in!";
