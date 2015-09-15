@@ -98,7 +98,7 @@
 
 						//restore defaults
 						$('.default_check').prop('checked', false);
-
+						$('#assignment_target_person').hide();
 
 					}else if(data == 0){
 						output = "Problem creating assignment! Do you have the right permissions?";
