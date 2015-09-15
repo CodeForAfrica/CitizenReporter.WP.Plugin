@@ -85,7 +85,17 @@
 				bounty: bounty
 			})
 				.done(function( data ) {
-					jQuery("#assignment_created").html(data);
+					var output = "";
+
+					if(data == 0){
+						output = "Assignment created successfully!"
+					}else if(data == 1){
+						output = "Problem creating assignment! Do you have the right permissions?";
+					}else{
+						output = "You are not logged in!";
+					}
+
+					jQuery("#assignment_created").html(output);
 			});
 
 		});

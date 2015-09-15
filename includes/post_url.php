@@ -7,7 +7,7 @@ require(realpath(dirname(__FILE__)).'/../../../../wp-blog-header.php');
  */
 
 if(!is_user_logged_in()){
-    print "You are not logged in!";
+    print -1;
 }else{
     //get author
     $author = get_current_user();
@@ -20,7 +20,7 @@ if(!is_user_logged_in()){
             'post_title' => $_POST['title'],
             'post_content' => $_POST['description'],
             'post_status' => 'published',
-            'post_type' => 'message'
+            'post_type' => 'assignment'
         )
     );
 
@@ -34,13 +34,12 @@ if(!is_user_logged_in()){
         update_post_meta( $post_id, 'assignment_date', $_POST['deadline']);
         update_post_meta( $post_id, 'assignment_bounty', $_POST['bounty']);
         //return success message!
-        print "Assignment created successfully!"
-        //then send message to targets
-
+        print 1;
+        //send message to targets if any
 
     }else{
 
-        print "Problem creating assignment! Do you have the right permissions?";
+        print 0;
     }
 
 
