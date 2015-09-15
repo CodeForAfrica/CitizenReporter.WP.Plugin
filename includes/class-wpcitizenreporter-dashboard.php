@@ -511,10 +511,23 @@ class WPCitizenReporter_Dashboard {
 					<input type="radio" name="type" id="changetype-all">
 					<label for="changetype-all">People near the specified location</label>
 					<br />
+
 					<input type="radio" name="type" id="changetype-all">
 					<label for="changetype-all">Specific person</label>
+						<datalist id="users_list">
+						<?php
+							//get list of users
+							$current_user = get_current_user();
+							$blog_users = get_users( 'blog_id=1&orderby=nicename' );
+							foreach($blog_users as $user){
+								if($user->user_nicename != $current_user->user_nicename)
+									print "<option value='".$user->user_nicename."'>";
+							}
 
-					<input type="text" name="taget" id="assignment_target" placeholder="Enter name">
+						?>
+						</datalist>
+
+					<input type="text"  list="users_list" id="assignment_target" placeholder="Enter name">
 
 					</radiogroup>
 				</div>
