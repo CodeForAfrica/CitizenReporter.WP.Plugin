@@ -504,15 +504,28 @@ class WPCitizenReporter_Dashboard {
 				</div>
 				<div class="assignment_target">
 					<h3>To whom do you want to send the assignment to?</h3>
-					<radiogroup>
-					<input type="radio" name="type" id="changetype-all" checked="checked">
+					<radiogroup id="target_radio">
+
+						<script>
+							jQuery(document).ready(function($) {
+								jQuery('#target_person').hide();
+								jQuery('#target_radio').change(function() {
+									selected_value = $("input[name='target_radio_type']:checked").val();
+									if(selected_value == "specific"){
+										jQuery('#target_person').show();
+									}else{
+										jQuery('#target_person').hide();
+									}
+								});
+							});
+						</script>
+					<input type="radio" name="target_radio_type" id="changetype-all" checked="checked" value="all">
 					<label for="changetype-all">Everyone</label>
 
-					<input type="radio" name="type" id="changetype-all">
+					<input type="radio" name="target_radio_type" id="changetype-all" value="nearby">
 					<label for="changetype-all">People near the specified location</label>
 					<br />
-
-					<input type="radio" name="type" id="changetype-all">
+					<input type="radio" name="target_radio_type" id="changetype-all" value="specific">
 					<label for="changetype-all">Specific person</label>
 						<datalist id="users_list">
 						<?php
@@ -526,10 +539,9 @@ class WPCitizenReporter_Dashboard {
 
 						?>
 						</datalist>
-
-					<input type="text"  list="users_list" id="assignment_target" placeholder="Enter name">
-
 					</radiogroup>
+					<input type="text"  list="users_list" id="target_person" placeholder="Enter name" name="target_person">
+
 				</div>
 				<div class="assignment_bounty">
 					<h3>Bounty</h3>
