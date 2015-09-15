@@ -319,7 +319,7 @@ class WPCitizenReporter_Dashboard {
 					<h2>Create Assignment</h2>
 				<div class="assignment_summary">
 					<input type="text" placeholder="Title" id="assignment_title">
-					<textarea placeholder="Description"></textarea>
+					<textarea placeholder="Description" id="assignment_description"></textarea>
 
 					<h3>Media Types</h3>
 					<div class="assigmnet_media_type">
@@ -503,8 +503,7 @@ class WPCitizenReporter_Dashboard {
 				</div>
 				<div class="assignment_target">
 					<h3>Who do you want to send the assignment to?</h3>
-					<radiogroup id="target_radio">
-
+					<radiogroup id="assignment_target">
 
 					<input type="radio" name="target_radio_type" id="changetype-all" checked="checked" value="all">
 					<label for="changetype-all">Everyone</label>
@@ -527,7 +526,7 @@ class WPCitizenReporter_Dashboard {
 						?>
 						</datalist>
 					</radiogroup>
-					<input type="text"  list="users_list" id="target_person" placeholder="Enter name" name="target_person">
+					<input type="text"  list="users_list" id="assignment_target_person" placeholder="Enter name" name="target_person">
 
 				</div>
 				<div class="assignment_input_group">
@@ -536,11 +535,13 @@ class WPCitizenReporter_Dashboard {
 				</div>
 				<div class="assignment_input_group">
 					<h3>Bounty</h3>
-					<input type="text" id="bounty" name="bounty"  value="" placeholder="How much do you want to pay for it?"/>
+					<input type="text" id="assignment_bounty" name="bounty"  value="" placeholder="How much do you want to pay for it?"/>
 				</div>
 				<div class="assignment_finish">
 					<input id="create_assignment" type="submit" name="save" class="button button-primary" value="Create assignment">
 				</div>
+					<label id="post_url" href="<?php print plugins_url( '', __FILE__ );?>/post_url.php">
+					<div id="assignment_created"></div>
 				</div>
 				<?php
 			}

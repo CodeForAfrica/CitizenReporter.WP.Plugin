@@ -29,22 +29,32 @@
 	 * be doing this, we should try to minimize doing that in our own work.
 	 */
 	$(document).ready(function($) {
-		$('#target_person').hide();
-		$('#target_radio').change(function() {
+		$('#assignment_target_person').hide();
+		$('#assignment_target').change(function() {
 			var selected_value = $("input[name='target_radio_type']:checked").val();
 			if(selected_value == "specific"){
-				$('#target_person').show();
+				$('#assignment_target_person').show();
 			}else{
-				$('#target_person').hide();
+				$('#assignment_target_person').hide();
 			}
 		});
 
 		//save assignment
 		$("#create_assignment").click(function() {
 			var title = ($("#assignment_title").val()).trim();
+			var description = ($("#assignment_description").val()).trim();
 			var address = ($("#loc_address").val()).trim();
 			var lat_lon = ($("#lat_lon_input").val()).trim();
+
+			var types = new Array();
+			$.each($("input[name='assignment_type[]']:checked"), function() {
+				types.push($(this).val());
+			});
+
+			var target = ($("input[name='target_radio_type']:checked").val()).trim();
+			var target_person = ($("#assignment_target_person").val()).trim();
 			var deadline = ($("#assignment_date").val()).trim();
+			var bounty = ($("#assignment_bounty").val()).trim();
 
 			//check for required fields
 			if(title == ""){
@@ -60,6 +70,24 @@
 				alert("Invalid date format!");
 				return;
 			}
+
+			//perform ajax request
+			var post_url = jQuery("#post_url").attr("href");
+			jQuery.post(post_url, {
+				title: title,
+				description: description,
+				types:	types,
+				address: address,
+				lat_lon: lat_lon,
+				target: target,
+				target_person: target_person,
+				deadline: deadline,
+				bounty: bounty
+			})
+				.done(function( data ) {
+					jQuery("#assignment_created").html(data);
+			});
+
 		});
 	});
 
