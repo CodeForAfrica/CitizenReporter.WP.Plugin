@@ -323,13 +323,13 @@ class WPCitizenReporter_Dashboard {
 
 					<h3>Media Types</h3>
 					<div class="assigmnet_media_type">
-						<input type="checkbox" value="narrative" name="assignment_type[]" class="quick_assignment_form_check default_check">
+						<input type="checkbox" value="narrative" name="assignment_type[]" class="quick_assignment_form_check">
 						<i class="fa fa-list-alt fa-assignment"></i>
 						Narrative
 					</div>
 				<div class="assigmnet_media_type">
 
-					<input type="checkbox" value="image" name="assignment_type[]" checked class="quick_assignment_form_check">
+					<input type="checkbox" value="image" name="assignment_type[]" checked class="quick_assignment_form_check default_check">
 					<i class="fa fa-photo fa-assignment"></i>
 					Image
 				</div>

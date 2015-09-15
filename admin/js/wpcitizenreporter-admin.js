@@ -73,6 +73,11 @@
 
 			//perform ajax request
 			var post_url = jQuery("#post_url").attr("href");
+
+			//processing message
+			jQuery("#assignment_created").html("Creating assignment...");
+
+			//post it
 			jQuery.post(post_url, {
 				title: title,
 				description: description,
