@@ -78,6 +78,72 @@ class WPCitizenReporter_Dashboard {
 		);
 		function payments_dashboard_widget_function()
 		{
+			$args = array(
+				'posts_per_page'   => 500000,
+				'offset'           => 0,
+				'category'         => '',
+				'category_name'    => '',
+				'orderby'          => 'date',
+				'order'            => 'DESC',
+				'include'          => '',
+				'exclude'          => '',
+				'post_type'        => 'payment',
+				'post_mime_type'   => '',
+				'post_parent'      => '',
+				'post_status'      => 'published',
+				'suppress_filters' => true
+			);
+			$payments = get_posts($args);
+			?>
+			<table class="fancy_table" cellspacing="0" summary="Payments">
+				<caption></caption>
+				<tbody>
+				<tr>
+					<th scope="col" class="nobg">Post</th>
+					<th scope="col">User</th>
+					<th scope="col">Receipt</th>
+					<th scope="col">Amount</th>
+					<th scope="col">Status</th>
+				</tr>
+				<?php
+				foreach($payments as $payment){
+					//get meta values
+					$post_id = get_post_meta($payment->ID, "post_id", true);
+					$post = get_post($post_id);
+					$pay_amount = get_post_meta($payment->ID, "pay_amount", true);
+					$user_id = get_post_meta($payment->ID, "user", true);
+					$user = get_user_by('id', $user_id);
+					$receipt = get_post_meta($payment->ID, "receipt", true);
+					$confirm = get_post_meta($payment->ID, "confirm", true);
+
+
+					if($confirm==null){
+						$btn = " btn-default";
+						$confirm = "None";
+					}else if($confirm=="1"){
+						$btn = " btn-success";
+						$confirm = "Confirmed";
+					}else{
+						//disputed
+						$btn =" btn-danger";
+						$confirm = "Dispued!";
+					}
+
+
+					//color code due date
+					print '<tr class="edit_assignment" data-href="'.$payment->ID.'">
+									<th scope="row" class="spec"><a href="post.php?post='.$post->ID.'&action=edit">'.$post->post_title.'</a></th>
+									<td><a href="user-edit.php?user_id='.$user_id.'">'.$user->user_nicename.'</a></td>
+									<td>'.$receipt.'</td>
+									<td>'.$pay_amount.'</td>
+									<td><button class="assign-btn btn btn-xs'.$btn.'">'.$confirm.'</button></td>
+								</tr>';
+
+				}
+				?>
+
+				</tbody></table>
+			<?php
 
 		}
 
@@ -115,7 +181,7 @@ class WPCitizenReporter_Dashboard {
 					});
 				});
 			</script>
-			<table id="active_assignments" cellspacing="0" summary="Active assignments">
+			<table id="active_assignments" class="fancy_table" cellspacing="0" summary="Active assignments">
 				<caption></caption>
 				<tbody>
 				<tr>

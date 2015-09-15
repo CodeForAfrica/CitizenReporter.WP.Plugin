@@ -116,13 +116,13 @@ h3.hndle.ui-sortable-handle {
 /*
     Active assignments table
     */
-#active_assignments{
+.fancy_table{
     width: 100%;
 }
 #active_assignments tr{
     cursor: pointer;
 }
-#active_assignments th {
+.fancy_table th {
     font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica,
     sans-serif;
     color: #6D929B;
@@ -135,7 +135,7 @@ h3.hndle.ui-sortable-handle {
     background: #CAE8EA;
 }
 
-#active_assignments  th.nobg {
+.fancy_table  th.nobg {
     border-top: 0;
     border-left: 0;
     border-right: 1px solid #C1DAD7;
