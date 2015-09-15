@@ -55,6 +55,11 @@
 				alert("Date is required!");
 				return;
 			}
+			//check if valid date
+			if(!moment(deadline).isValid()){
+				alert("Invalid date format!");
+				return;
+			}
 		});
 	});
 
