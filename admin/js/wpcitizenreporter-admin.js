@@ -38,6 +38,24 @@
 				$('#target_person').hide();
 			}
 		});
+
+		//save assignment
+		$("#create_assignment").click(function() {
+			var title = ($("#assignment_title").val()).trim();
+			var address = ($("#loc_address").val()).trim();
+			var lat_lon = ($("#lat_lon_input").val()).trim();
+			var deadline = ($("#assignment_date").val()).trim();
+
+			//check for required fields
+			if(title == ""){
+				alert("Title is required!");
+				return;
+			}
+			if(deadline == ""){
+				alert("Date is required!");
+				return;
+			}
+		});
 	});
 
 })( jQuery );

@@ -318,7 +318,7 @@ class WPCitizenReporter_Dashboard {
 				<div class="quick_assignment">
 					<h2>Create Assignment</h2>
 				<div class="assignment_summary">
-					<input type="text" placeholder="Title">
+					<input type="text" placeholder="Title" id="assignment_title">
 					<textarea placeholder="Description"></textarea>
 
 					<h3>Media Types</h3>
@@ -376,7 +376,7 @@ class WPCitizenReporter_Dashboard {
 							mapOptions);
 
 						var input = /** @type {HTMLInputElement} */(
-							document.getElementById('pac-input'));
+							document.getElementById('loc_address'));
 
 						var lat_lon_input = /** @type {HTMLInputElement} */(
 							document.getElementById('lat_lon_input'));
@@ -482,8 +482,7 @@ class WPCitizenReporter_Dashboard {
 					google.maps.event.addDomListener(window, 'load', initialize);
 
 				</script>
-				<input id="pac-input" class="controls" type="text" name="loc_address" value="<?php echo $address;?>"
-					   placeholder="Enter a location">
+				<input id="loc_address" class="controls" type="text" name="loc_address" placeholder="Enter a location">
 
 				<div id="type-selector" class="controls">
 					<input type="radio" name="type" id="changetype-all" checked="checked">
@@ -540,7 +539,7 @@ class WPCitizenReporter_Dashboard {
 					<input type="text" id="bounty" name="bounty"  value="" placeholder="How much do you want to pay for it?"/>
 				</div>
 				<div class="assignment_finish">
-					<input type="submit" name="save" class="button button-primary" value="Create assignment">
+					<input id="create_assignment" type="submit" name="save" class="button button-primary" value="Create assignment">
 				</div>
 				</div>
 				<?php
