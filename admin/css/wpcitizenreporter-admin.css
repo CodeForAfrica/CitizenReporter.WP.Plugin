@@ -151,3 +151,9 @@ h3.hndle.ui-sortable-handle {
     background-color: #000;
     padding-top: 70px;
 }
+.show_video_thumb{
+    display: inline-block;
+    width: 150px !important;
+    height: 150px;
+    background-color: #000;
+}
