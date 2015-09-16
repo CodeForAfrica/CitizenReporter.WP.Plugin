@@ -174,6 +174,15 @@ class JSON_API_CR_Controller {
 //	  }
     }
 
+    public function send_message(){
 
+        $recipient = "admin";
+        if(isset($_POST['recipient']))
+            $recipient = $_POST['recipient'];
+
+        send_message($_POST['author'], $_POST['message_string'], $recipient);
+
+        return array("result"=>"OK", "message"=>"Message sent!");
+    }
 
 }
