@@ -154,6 +154,7 @@ h3.hndle.ui-sortable-handle {
 .show_thumb_caption{
     height: 30px;
     background-color: #fff;
+    vertical-align: middle;
 }
 #latest-media-thumbnials img{
     width: 145px;

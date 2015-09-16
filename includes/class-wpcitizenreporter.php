@@ -141,6 +141,10 @@ class WPCitizenReporter {
 		 * Handling payment
 		 */
 		require_once plugin_dir_path(  dirname( __FILE__ )  ) . 'includes/payment.php';
+		/*
+		 * JSON Stuff
+		 */
+		require_once plugin_dir_path(  dirname( __FILE__ )  ) . 'includes/json-api/json-api.php';
 
 		$this->loader = new WPCitizenReporter_Loader();
 
