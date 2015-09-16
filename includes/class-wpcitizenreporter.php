@@ -144,7 +144,8 @@ class WPCitizenReporter {
 		/*
 		 * JSON Stuff
 		 */
-		require_once plugin_dir_path(  dirname( __FILE__ )  ) . 'includes/json-api-controller.php';
+
+		require_once plugin_dir_path(  dirname( __FILE__ )  ) . 'includes/json-api-extend.php';
 
 		$this->loader = new WPCitizenReporter_Loader();
 
