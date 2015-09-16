@@ -5,12 +5,6 @@ $dir = json_api_dir();
 @include_once "$dir/singletons/query.php";
 @include_once "$dir/singletons/introspector.php";
 @include_once "$dir/singletons/response.php";
-@include_once "$dir/models/post.php";
-@include_once "$dir/models/comment.php";
-@include_once "$dir/models/category.php";
-@include_once "$dir/models/tag.php";
-@include_once "$dir/models/author.php";
-@include_once "$dir/models/attachment.php";
 
 function json_api_init() {
   global $json_api;
