@@ -262,9 +262,9 @@ class WPCitizenReporter_Dashboard {
 							<img src="' . $m->guid . '"/>
 						</a>';
 					}else if(strpos($m->post_mime_type, "audio") !==false) {
-						print "<div class='show_audio_thumb'>".do_shortcode("[audio height='150px' width='150px' mp3='".$m->guid."'][/audio]")."</div>";
+						print "<div class='show_audio_thumb'>".do_shortcode("[audio mp3='".$m->guid."'][/audio]")."</div>";
 					}else if(strpos($m->post_mime_type, "video") !==false) {
-						print "<div class='show_video_thumb'>".do_shortcode("[video height='150px' width='150px' mp4='".$m->guid."'][/video]")."</div>";
+						print "<div class='show_video_thumb'>".do_shortcode("[video height='145px' width='145px' mp4='".$m->guid."'][/video]")."</div>";
 					}
 				}
 			?>
@@ -273,12 +273,22 @@ class WPCitizenReporter_Dashboard {
 			<div class="media-totals">
 					<?php $posts = wp_count_posts();
 					?>
-					<a href="<?php print admin_url();?>edit.php" class="latest_media_text"><span class="fui-new img"></span><?php print $posts->publish;?></a>
-					<a href="<?php print admin_url();?>upload.php?post_mime_type=video" class="latest_media_text"><span class="fui-video img"></span><?php print media_totals('video');?></a>
-
-					<a href="<?php print admin_url();?>upload.php?post_mime_type=image" class="latest_media_text"><span class="fui-image img"></span><?php print media_totals('video');?></a>
-					<a href="<?php print admin_url();?>upload.php?post_mime_type=audio" class="latest_media_text"><span class="fui-mic img"></span><?php print media_totals('video');?></a>
-
+					<table class="latest-media-tr">
+						<tr>
+							<td class="btn btn-default latest-media-btn">
+								<a href="<?php print admin_url();?>edit.php" class="latest_media_text"><span class="fui-new img"></span><?php print $posts->publish;?></a>
+							</td>
+							<td class="btn btn-default latest-media-btn">
+								<a href="<?php print admin_url();?>upload.php?post_mime_type=video" class="latest_media_text"><span class="fui-video"></span><?php print media_totals('video');?></a>
+							</td>
+							<td class="btn btn-default latest-media-btn">
+								<a href="<?php print admin_url();?>upload.php?post_mime_type=image" class="latest_media_text"><span class="fui-image"></span><?php print media_totals('video');?></a>
+							</td>
+							<td class="btn btn-default latest-media-btn">
+								<a href="<?php print admin_url();?>upload.php?post_mime_type=audio" class="latest_media_text"><span class="fui-mic"></span><?php print media_totals('video');?></a>
+							</td>
+						</tr>
+					</table>
 			</div>
 
 			<?php
