@@ -242,6 +242,7 @@ class WPCitizenReporter_Dashboard {
 		);
 		function latest_media_dashboard_widget_function() {
 			?>
+
 			<link href="//cdn.rawgit.com/noelboss/featherlight/1.3.3/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 			<script src="//code.jquery.com/jquery-latest.js"></script>
 			<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.3/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
@@ -258,16 +259,24 @@ class WPCitizenReporter_Dashboard {
 				$i = 0;
 				foreach($media as $m){
 					if($i<6) {
+						print "<div class='show_thumb'>";
 						if (strpos($m->post_mime_type, "image") !== false) {
-							print '<a href=""  data-featherlight="' . $m->guid . '">
-							<img src="' . $m->guid . '"/>
-						</a>';
+							print '<div class="show_img_thumb"><a href=""  data-featherlight="' . $m->guid . '"><img src="' . $m->guid . '"/></a></div>';
 						} else if (strpos($m->post_mime_type, "audio") !== false) {
 							print "<div class='show_audio_thumb'>" . do_shortcode("[audio mp3='" . $m->guid . "'][/audio]") . "</div>";
 						} else if (strpos($m->post_mime_type, "video") !== false) {
 							print "<div class='show_video_thumb'>" . do_shortcode("[video height='145px' width='145px' mp4='" . $m->guid . "'][/video]") . "</div>";
 						}
+						//find parent post
+						if($m->post_parent !=0 ){
+							$parent = get_post($m->post_parent);
+							print "<div class='show_thumb_caption'><a href='post.php?post=".$parent->ID."&action=edit'>".$parent->post_title."</a></div>";
+						}else{
+							print "<div class='show_thumb_caption'>No caption</div>";
+						}
+
 						$i++;
+						print "</div>";
 					}
 				}
 			?>
