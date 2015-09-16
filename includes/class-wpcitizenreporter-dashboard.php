@@ -255,16 +255,19 @@ class WPCitizenReporter_Dashboard {
 				);
 				$media = get_posts($args);
 
+				$i = 0;
 				foreach($media as $m){
-
-					if(strpos($m->post_mime_type, "image") !==false) {
-						print '<a href=""  data-featherlight="' . $m->guid . '">
+					if($i<6) {
+						if (strpos($m->post_mime_type, "image") !== false) {
+							print '<a href=""  data-featherlight="' . $m->guid . '">
 							<img src="' . $m->guid . '"/>
 						</a>';
-					}else if(strpos($m->post_mime_type, "audio") !==false) {
-						print "<div class='show_audio_thumb'>".do_shortcode("[audio mp3='".$m->guid."'][/audio]")."</div>";
-					}else if(strpos($m->post_mime_type, "video") !==false) {
-						print "<div class='show_video_thumb'>".do_shortcode("[video height='145px' width='145px' mp4='".$m->guid."'][/video]")."</div>";
+						} else if (strpos($m->post_mime_type, "audio") !== false) {
+							print "<div class='show_audio_thumb'>" . do_shortcode("[audio mp3='" . $m->guid . "'][/audio]") . "</div>";
+						} else if (strpos($m->post_mime_type, "video") !== false) {
+							print "<div class='show_video_thumb'>" . do_shortcode("[video height='145px' width='145px' mp4='" . $m->guid . "'][/video]") . "</div>";
+						}
+						$i++;
 					}
 				}
 			?>
