@@ -107,7 +107,7 @@ h3.hndle.ui-sortable-handle {
     Media gallery widget
 */
 #latest-media-thumbnials{
-    width: 455px;
+    width: 100%;
 }
 #latest-media-thumbnials img{
     width: 150px;
@@ -150,14 +150,23 @@ h3.hndle.ui-sortable-handle {
     height: 80px;
     background-color: #000;
     padding-top: 70px;
+    margin-right: 1px;
 }
 .show_video_thumb{
     display: inline-block;
     width: 150px !important;
     height: 150px;
     background-color: #000;
+    margin-right: 1px;
 }
 a.media-btn.btn.btn-block {
     width: 17.4%;
     margin: 0px;
+}
+.latest_media_text{
+    font-size: 2em;
+    margin: 10px;
+}
+.latest_media_text .img{
+    margin-right: 10px;
 }

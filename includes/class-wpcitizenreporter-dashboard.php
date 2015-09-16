@@ -273,11 +273,11 @@ class WPCitizenReporter_Dashboard {
 			<div class="media-totals">
 					<?php $posts = wp_count_posts();
 					?>
-					<a href="<?php print admin_url();?>edit.php" class="media-btn btn btn-block btn-inverse"><span class="fui-new"></span><?php print $posts->publish;?></a>
-					<a href="<?php print admin_url();?>upload.php?post_mime_type=video" class="media-btn btn btn-block btn-warning"><span class="fui-video"></span><?php print media_totals('video');?></a>
+					<a href="<?php print admin_url();?>edit.php" class="latest_media_text"><span class="fui-new img"></span><?php print $posts->publish;?></a>
+					<a href="<?php print admin_url();?>upload.php?post_mime_type=video" class="latest_media_text"><span class="fui-video img"></span><?php print media_totals('video');?></a>
 
-					<a href="<?php print admin_url();?>upload.php?post_mime_type=image" class="media-btn btn btn-block btn-danger"><span class="fui-image"></span><?php print media_totals('video');?></a>
-					<a href="<?php print admin_url();?>upload.php?post_mime_type=audio" class="media-btn btn btn-block btn-info"><span class="fui-mic"></span><?php print media_totals('video');?></a>
+					<a href="<?php print admin_url();?>upload.php?post_mime_type=image" class="latest_media_text"><span class="fui-image img"></span><?php print media_totals('video');?></a>
+					<a href="<?php print admin_url();?>upload.php?post_mime_type=audio" class="latest_media_text"><span class="fui-mic img"></span><?php print media_totals('video');?></a>
 
 			</div>
 

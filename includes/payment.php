@@ -23,9 +23,10 @@ function register_payment() {
         'labels'        => $labels,
         'description'   => 'Defines payment structure',
         'public'        => true,
-        'menu_position' => 6,
+        'menu_position' => null,
         'supports'      => array( 'title', 'custom-fields'),
         'has_archive'   => false,
+        'show_ui' => true,
     );
     register_post_type( 'payment', $args );
 }
