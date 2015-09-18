@@ -44,10 +44,16 @@ if(!is_user_logged_in()){
          * if target is nearby, look for nearest users(or users in same town)
          */
 
-        if($_POST['target'] == "everyone"){
-            $reg_ids = users_gcm_ids();
-            assignment_send_push($_POST['title'], $post_id, $_POST['deadline'], $reg_ids);
+        $reg_ids = users_gcm_ids();
+        
+        if($_POST['target'] == "specific"){
+            //send to specific person
+            $user = get_user_by('login', $_POST['target_person']);
+            $reg_ids = users_gcm_ids($user->ID);
+        }else{
+            //send to people nearby
         }
+        assignment_send_push($_POST['title'], $post_id, $_POST['deadline'], $reg_ids);
 
     }else{
 
