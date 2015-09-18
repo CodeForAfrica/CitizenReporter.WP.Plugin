@@ -300,9 +300,7 @@ function pay_user_box_save()
 
             echo $payment_post_id;
 
-        }
-
-        /*
+         /*
          * Send notification
          */
 
@@ -310,6 +308,10 @@ function pay_user_box_save()
 
         $message = array("payment" => $pushMessage, "post_id" => $post_id, "receipt" => $mpesa_confirmation, "payment_id" => $payment_post_id, "pay_amount"=>$pay_amount);
         send_push_notification($reg_ids, $message);
+
+        }
+
+
     }
     die();
 }

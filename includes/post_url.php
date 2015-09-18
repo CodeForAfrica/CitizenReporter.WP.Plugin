@@ -30,12 +30,24 @@ if(!is_user_logged_in()){
         update_post_meta( $post_id, 'assignment_address', $_POST['address']);
         update_post_meta( $post_id, 'assignment_location', $_POST['lat_lon']);
         update_post_meta( $post_id, 'assignment_target', $_POST['target']);
-        update_post_meta( $post_id, 'assignment_target_person', $_POST['target_person']);
+        if($_POST['target']=="specific")
+           update_post_meta( $post_id, 'assignment_target_person', $_POST['target_person']);
         update_post_meta( $post_id, 'assignment_date', $_POST['deadline']);
         update_post_meta( $post_id, 'assignment_bounty', $_POST['bounty']);
         //return success message!
         print 1;
         //send message to targets if any
+
+        /**
+         * if target is specific, send only to target_person
+         * if target is everyone, send to everyone
+         * if target is nearby, look for nearest users(or users in same town)
+         */
+
+        if($_POST['target'] == "everyone"){
+            $reg_ids = users_gcm_ids();
+            assignment_send_push($_POST['title'], $post_id, $_POST['deadline'], $reg_ids);
+        }
 
     }else{
 

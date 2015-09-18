@@ -172,20 +172,24 @@ function assignment_type_box_save( $post_id ) {
     $notified = get_post_meta( $post_id, 'notified' );
 
     if(empty($notified)){
-        update_post_meta( $post_id, 'notified', "1" );
-
         $pushMessage = get_the_title($post_id);
 
         $reg_ids = users_gcm_ids();
         $deadline = get_post_meta( $post_id, 'assignment_date', true);
+        
+        assignment_send_push($pushMessage, $post_id, $deadline, $reg_ids);
 
-        $message = array("assignment" => $pushMessage, "assignmentID"=>$post_id, "assignmentDeadline"=>$deadline);
-        send_push_notification($reg_ids, $message);
     }
 
 }
 
+//send notifications
+function assignment_send_push($pushMessage, $post_id, $deadline, $reg_ids){
+    $message = array("assignment" => $pushMessage, "assignmentID"=>$post_id, "assignmentDeadline"=>$deadline);
+    send_push_notification($reg_ids, $message);
+    update_post_meta( $post_id, 'notified', "1" );
 
+}
 
 //add location meta data
 add_action( 'add_meta_boxes', 'assignment_location_box' );
