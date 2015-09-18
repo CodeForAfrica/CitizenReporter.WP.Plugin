@@ -45,13 +45,16 @@ if(!is_user_logged_in()){
          */
 
         $reg_ids = users_gcm_ids();
-        
+
         if($_POST['target'] == "specific"){
             //send to specific person
             $user = get_user_by('login', $_POST['target_person']);
             $reg_ids = users_gcm_ids($user->ID);
-        }else{
+
+        }else if($_POST['target'] == "nearby"){
             //send to people nearby
+            $reg_ids = get_nearby_users($_POST['lat_lon']);
+
         }
         assignment_send_push($_POST['title'], $post_id, $_POST['deadline'], $reg_ids);
 

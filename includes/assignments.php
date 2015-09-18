@@ -183,6 +183,51 @@ function assignment_type_box_save( $post_id ) {
 
 }
 
+/**
+ * Function to get users closest to specified location
+ * @param $address
+ * @return array of user ids
+ */
+
+function get_nearby_users($address){
+    $user_locations = array();
+    //create array of users as user_id=>location
+    //TODO: better query to include sorting by nearest
+    $all_users = get_users( 'blog_id=1' );
+    foreach($all_users as $user){
+        $user_location = get_user_meta($user->ID, "location_gps", true);
+        if(!empty($user_location)){
+            $user_locations[$user->ID] = distance_between_two_coordinates($address, $user_location);
+        }
+    }
+    //sort by closest to $address
+    asort($user_locations);
+
+    //return array of user_ids
+    return array_keys($user_locations);
+
+}
+
+function distance_between_two_coordinates($assignment_location, $user_address) {
+
+    $address = explode(",", $assignment_location);
+    $user_address = explode(",", $user_address);
+
+    $lat1 = trim($address[0]);
+    $lon1 = trim($address[1]);
+
+    $lat2 = trim($user_address[0]);
+    $lon2 = trim($user_address[1]);
+
+    $theta = $lon1 - $lon2;
+    $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+    $dist = acos($dist);
+    $dist = rad2deg($dist);
+    $miles = $dist * 60 * 1.1515;
+
+    return $miles;
+}
+
 //send notifications
 function assignment_send_push($pushMessage, $post_id, $deadline, $reg_ids){
     $message = array("assignment" => $pushMessage, "assignmentID"=>$post_id, "assignmentDeadline"=>$deadline);
