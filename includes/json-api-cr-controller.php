@@ -176,11 +176,25 @@ class JSON_API_CR_Controller {
 
     public function send_message(){
 
-        $recipient = "admin";
+        $recipient = 1;
         if(isset($_POST['recipient']))
             $recipient = $_POST['recipient'];
 
-        send_message($_POST['author'], $_POST['message_string'], $recipient);
+        if(isset($_POST['author'])){
+            $author = $_POST['author'];
+        }else{
+            //if sent username instead
+            if(isset($_POST['username'])){
+
+                $author_data = get_user_by('login', $_POST['username']);
+                $author = $author_data->ID;
+
+            }else{
+                return array("result"=>"NOK", "message"=>"Missing parameters");
+            }
+        }
+
+        send_message($author, $_POST['message_string'], $recipient);
 
         return array("result"=>"OK", "message"=>"Message sent!");
     }
