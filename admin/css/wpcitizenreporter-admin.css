@@ -123,13 +123,12 @@ h3.hndle.ui-sortable-handle {
     border-top: 1px solid #C1DAD7;
     letter-spacing: 2px;
     text-align: left;
-    padding: 6px 6px 6px 12px;
+    padding: 6px;
     background: #CAE8EA;
-
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 200px;
+    max-width: 120px;
 }
 
 .fancy_table  th.nobg {
