@@ -101,7 +101,9 @@ class WPCitizenReporter_Dashboard {
 				<tr>
 					<th scope="col" class="nobg">Post</th>
 					<th scope="col">User</th>
-					<th scope="col">Receipt</th>
+					<!--
+						<th scope="col">Receipt</th>
+					-->
 					<th scope="col">Amount</th>
 					<th scope="col">Status</th>
 				</tr>
@@ -134,7 +136,6 @@ class WPCitizenReporter_Dashboard {
 					print '<tr class="edit_assignment" data-href="'.$payment->ID.'">
 									<th scope="row" class="spec"><a href="post.php?post='.$post->ID.'&action=edit">'.$post->post_title.'</a></th>
 									<td><a href="user-edit.php?user_id='.$user_id.'">'.$user->user_nicename.'</a></td>
-									<td>'.$receipt.'</td>
 									<td>'.$pay_amount.'</td>
 									<td><button class="assign-btn btn btn-xs'.$btn.'">'.$confirm.'</button></td>
 								</tr>';
