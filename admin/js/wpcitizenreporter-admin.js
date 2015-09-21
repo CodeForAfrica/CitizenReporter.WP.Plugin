@@ -117,7 +117,7 @@
 					setTimeout(function(){
 						$("#assignment_created").fadeOut("slow");
 					},2000);
-					
+
 					setTimeout(function(){
 						jQuery("#assignment_created").html("");
 						$("#assignment_created").fadeIn("slow");

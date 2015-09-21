@@ -203,6 +203,11 @@ function get_nearby_users($address){
     //sort by closest to $address
     asort($user_locations);
 
+    //return 5 or less
+    if(count($user_locations)>5){
+        $user_locations = array_slice($user_locations, 5);
+    }
+
     //return array of user_ids
     return array_keys($user_locations);
 
