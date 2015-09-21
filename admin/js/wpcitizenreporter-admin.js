@@ -92,7 +92,11 @@
 				.done(function( data ) {
 					var output = "";
 
-					if(data == 1){
+					if(data == 0){
+						output = "Problem creating assignment! Do you have the right permissions?";
+					}/*else if(data == -1){
+						output = "You are not logged in!";
+					}*/else{
 
 						output = "Assignment created successfully!"
 						//now clear the input boxes
@@ -105,10 +109,6 @@
 						$('.default_check').prop('checked', true);
 						$('#assignment_target_person').hide();
 
-					}else if(data == 0){
-						output = "Problem creating assignment! Do you have the right permissions?";
-					}else{
-						output = "You are not logged in!";
 					}
 
 					jQuery("#assignment_created").html(output);
@@ -116,7 +116,13 @@
 					//fade out response message after 2 seconds
 					setTimeout(function(){
 						$("#assignment_created").fadeOut("slow");
-					},2000)
+					},2000);
+					
+					setTimeout(function(){
+						jQuery("#assignment_created").html("");
+						$("#assignment_created").fadeIn("slow");
+					},2000);
+
 			});
 
 		});

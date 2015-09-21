@@ -6,9 +6,6 @@ require(realpath(dirname(__FILE__)).'/../../../../wp-blog-header.php');
  * and returns a result message
  */
 
-if(!is_user_logged_in()){
-    print -1;
-}else{
     //get author
     $author = get_current_user();
 
@@ -63,6 +60,3 @@ if(!is_user_logged_in()){
         print 0;
     }
 
-
-
-}
