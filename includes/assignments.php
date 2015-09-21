@@ -532,6 +532,7 @@ function assignment_responses_box_content( $post ) {
     <?php endwhile;
     print "</ul>";
 }
+
 //add end date meta box
 add_action( 'add_meta_boxes', 'assignment_date_box' );
 function assignment_date_box() {
@@ -571,8 +572,6 @@ function assignment_date_box_save( $post_id ) {
     $assignment_date = $_POST['assignment_date'];
     update_post_meta( $post_id, 'assignment_date', $assignment_date );
 }
-
-
 //add bounty meta data
 add_action( 'add_meta_boxes', 'assignment_bounty_box' );
 function assignment_bounty_box() {
