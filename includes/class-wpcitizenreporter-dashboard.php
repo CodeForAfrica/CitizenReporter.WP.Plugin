@@ -128,7 +128,7 @@ class WPCitizenReporter_Dashboard {
 					}else{
 						//disputed
 						$btn =" btn-danger";
-						$confirm = "Dispued!";
+						$confirm = "Disputed!";
 					}
 
 
@@ -141,6 +141,7 @@ class WPCitizenReporter_Dashboard {
 								</tr>';
 
 				}
+				?>
 				?>
 
 				</tbody></table>
