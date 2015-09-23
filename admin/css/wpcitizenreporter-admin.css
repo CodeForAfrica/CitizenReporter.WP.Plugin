@@ -193,3 +193,6 @@ a.media-btn.btn.btn-block {
 .latest-media-tr{
     width: 100%;
 }
+.show_video_thumb .mejs-video {
+    height: 145px !important;
+}
