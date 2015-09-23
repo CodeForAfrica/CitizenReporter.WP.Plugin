@@ -159,6 +159,10 @@ h3.hndle.ui-sortable-handle {
     height: 30px;
     background-color: #fff;
     vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0px 5px;
 }
 #latest-media-thumbnials img{
     width: 145px;
