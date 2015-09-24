@@ -196,7 +196,8 @@ class WPCitizenReporter {
 		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'active_assignments_dashboard_widget' );
 		//quick chat widget
 		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'quick_chat_dashboard_widget' );
-
+		//remove unnecessary menu items
+		$this->loader->add_action( 'wp_dashboard_setup', $dashboard_plugin,'wpse28782_remove_menu_items' );
 	}
 
 	/**

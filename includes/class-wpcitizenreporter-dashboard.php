@@ -16,8 +16,6 @@
 
 class WPCitizenReporter_Dashboard {
 
-
-
 	// Custom Dashboard
 	public function summary_widget() {
 		$screen = get_current_screen();
@@ -70,12 +68,12 @@ class WPCitizenReporter_Dashboard {
 	public function quick_chat_dashboard_widget()
 	{
 
-
 		wp_add_dashboard_widget(
 			'quick_chat_dashboard_widget',         // Widget slug.
 			'Payments',         // Title.
 			'payments_dashboard_widget_function' // Display function.
 		);
+
 		function payments_dashboard_widget_function()
 		{
 			$args = array(
@@ -331,7 +329,13 @@ class WPCitizenReporter_Dashboard {
 			return $attachments;
 		}
 	}
+	//remove unrequired menu items
+	function wpse28782_remove_menu_items() {
+		remove_menu_page( 'edit.php?post_type=message' );
+		remove_menu_page( 'edit.php?post_type=payment' );
+	}
 
+	//add assignment
 	public function add_quick_draft_assignment_dashboard_widget(){
 
 

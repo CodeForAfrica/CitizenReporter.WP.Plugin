@@ -6,6 +6,7 @@
  * @param array $methods
  * @return array
  */
+
 function higher_mem_xmlrpc($methods) {
     ini_set('memory_limit', '256M');
     return $methods;
