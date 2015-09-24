@@ -27,7 +27,7 @@ function assignment() {
         'not_found'          => __( 'No assignments found' ),
         'not_found_in_trash' => __( 'No assignments found in the Trash' ),
         'parent_item_colon'  => '',
-        'menu_name'          => 'Assignments'
+        'menu_name'          => 'Assignments',
     );
     $args = array(
         'labels'        => $labels,
@@ -36,6 +36,7 @@ function assignment() {
         'menu_position' => 6,
         'supports'      => array( 'title', 'editor', 'revisions', 'thumbnail'),
         'has_archive'   => true,
+        'menu_icon'   => 'dashicons-clipboard'
     );
     register_post_type( 'assignment', $args );
 }

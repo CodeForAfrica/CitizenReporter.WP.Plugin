@@ -23,6 +23,7 @@ function lesson() {
         'menu_position' => 6,
         'supports'      => array( 'title', 'editor', 'revisions', 'thumbnail'),
         'has_archive'   => true,
+        'menu_icon'   => 'dashicons-book'
     );
     register_post_type( 'lesson', $args );
 }
