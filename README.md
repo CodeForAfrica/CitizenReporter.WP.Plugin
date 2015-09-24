@@ -21,13 +21,12 @@ Citizen Reporter is based on Wordpress and you just need to install this plugin 
 3. Install dependencies
  
     * The messaging component is built as an [independent plugin](https://github.com/nickhargreaves/WP_GCM_Chat) so that others can use it in their projects. You can it install the same way you installed the main plugin in 2 above.
-    * You also need to install the [JSON-API plugin](https://wordpress.org/plugins/json-api/)
+    * Install the [JSON-API plugin](https://wordpress.org/plugins/json-api/) for API functionality.
 
 4. Themeing
 
-    You can use your own theme for the dashboard or leave the default Wordpress admin theme. However, we recommend using the [WP Flat Admin theme](https://github.com/nickhargreaves/WP_FlatAdmin) that is built to work with this plugin.
+    We recommend using the [WP Flat Admin theme](https://github.com/nickhargreaves/WP_FlatAdmin) that is built to work with this plugin. However, you can use your own theme for the or even the default Wordpress admin theme. 
     
 5. App Integration
     
-    You can set up the android application client using [the guide here](https://github.com/CodeForAfrica/CitizenReporter)
-   
+    Use [the guide here](https://github.com/CodeForAfrica/CitizenReporter) to set up the Android client.
