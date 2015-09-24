@@ -140,7 +140,6 @@ class WPCitizenReporter_Dashboard {
 
 				}
 				?>
-				?>
 
 				</tbody></table>
 			<?php
