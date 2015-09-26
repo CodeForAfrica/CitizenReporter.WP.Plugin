@@ -162,6 +162,6 @@ class JSON_API_CR_Controller {
         return array("result"=>"OK", "user"=>$p);
 //	  }
     }
-    
+
 
 }
