@@ -200,3 +200,13 @@ a.media-btn.btn.btn-block {
 .mejs-container .mejs-controls div {
     width: 20px !important;
 }
+/**
+   hide unnecessary items from top bar
+*/
+#wp-admin-bar-new-payment{
+    display: none;
+}
+
+#wp-admin-bar-new-message{
+    display: none;
+}
