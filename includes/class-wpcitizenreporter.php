@@ -147,6 +147,12 @@ class WPCitizenReporter {
 
 		require_once plugin_dir_path(  dirname( __FILE__ )  ) . 'includes/json-api-extend.php';
 
+		/**
+		 * Return only user's posts
+		 */
+
+		require_once plugin_dir_path(  dirname( __FILE__ )  ) . 'includes/users_posts_xmlrpc.php';
+
 		$this->loader = new WPCitizenReporter_Loader();
 
 	}
