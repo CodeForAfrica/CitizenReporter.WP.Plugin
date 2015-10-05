@@ -53,11 +53,7 @@ h3.hndle.ui-sortable-handle {
 #map-canvas {
     height: 250px;
 }
-#lat_lon_input{
 
-    display:none;
-
-}
 #type-selector{
     display:none;
 }

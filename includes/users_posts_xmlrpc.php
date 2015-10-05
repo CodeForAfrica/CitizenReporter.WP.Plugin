@@ -16,10 +16,14 @@
 * @return array|IXR_Error
 */
 
-add_action('xmlrpc_methods', 'mw_getRecentPosts_User');
 
-function mw_getRecentPosts_User( $args ) {
-    $this->escape( $args );
+function citizenReporter_getRecentPostsUser( $args ) {
+
+    $recent_posts = array();
+    /*
+    //$this->escape( $args );
+    global $wp_xmlrpc_server;
+    $wp_xmlrpc_server->escape( $args );
 
     $username = $args[1];
     $password = $args[2];
@@ -34,15 +38,14 @@ function mw_getRecentPosts_User( $args ) {
     if ( ! current_user_can( 'edit_posts' ) )
     return new IXR_Error( 401, __( 'Sorry, you cannot edit posts on this site.' ) );
 
-    /** This action is documented in wp-includes/class-wp-xmlrpc-server.php */
-    do_action( 'xmlrpc_call', 'metaWeblog.getRecentPosts' );
+    /** This action is documented in wp-includes/class-wp-xmlrpc-server.php
+    //do_action( 'xmlrpc_call', 'metaWeblog.getRecentPostsUser' );
 
     $posts_list = wp_get_recent_posts( $query );
 
     if ( !$posts_list )
     return array();
 
-    $recent_posts = array();
     foreach ($posts_list as $entry) {
     if ( !current_user_can( 'edit_post', $entry['ID'] ) )
     continue;
@@ -123,7 +126,36 @@ function mw_getRecentPosts_User( $args ) {
         );
         }
     }
-
+*/
     return $recent_posts;
 }
+
+
+function citizenReporter_new_xmlrpc_methods( $methods ) {
+    $methods['citizenReporter.getRecentPostsUser'] = 'citizenReporter_getRecentPostsUser';
+    return $methods;
+}
+add_filter( 'xmlrpc_methods', 'citizenReporter_new_xmlrpc_methods');
+
+
+function mynamespace_getUserID( $args ) {
+    global $wp_xmlrpc_server;
+    $wp_xmlrpc_server->escape( $args );
+
+    $blog_id  = $args[0];
+    $username = $args[1];
+    $password = $args[2];
+
+    if ( ! $user = $wp_xmlrpc_server->login( $username, $password ) )
+        return $wp_xmlrpc_server->error;
+
+    return $user->ID;
+}
+
+function mynamespace_new_xmlrpc_methods( $methods ) {
+    $methods['mynamespace.getUserID'] = 'mynamespace_getUserID';
+    return $methods;
+}
+add_filter( 'xmlrpc_methods', 'mynamespace_new_xmlrpc_methods');
+
 ?>

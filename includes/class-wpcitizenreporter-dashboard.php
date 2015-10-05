@@ -387,7 +387,7 @@ class WPCitizenReporter_Dashboard {
 
 				?>
 				<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
-				<input type="text" id="lat_lon_input" name="lat_lon_input" value="<?php echo $location;?>" class="quick_assignment_form"/>
+				<input type="hidden" id="lat_lon_input" name="lat_lon_input" value="<?php echo $location;?>" class="quick_assignment_form"/>
 
 				<script>
 					function initialize() {

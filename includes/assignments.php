@@ -273,11 +273,6 @@ function assignment_location_box_content( $post ) {
         #map-canvas {
             height: 250px;
         }
-        #lat_lon_input{
-
-            display:none;
-
-        }
         #type-selector{
             display:none;
         }
@@ -326,7 +321,7 @@ function assignment_location_box_content( $post ) {
         }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
-    <input type="text" id="lat_lon_input" name="lat_lon_input" value="<?php echo $location;?>" />
+    <input type="hidden" id="lat_lon_input" name="lat_lon_input" value="<?php echo $location;?>" />
 
     <script>
         function initialize() {
