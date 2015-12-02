@@ -345,7 +345,7 @@ class WPCitizenReporter_Dashboard {
 			);
 			function quick_draft_assignment_dashboard_widget_function() {
 				?>
-				
+
 				<div class="quick_assignment">
 					<h2>Create Assignment</h2>
 				<div class="assignment_summary">

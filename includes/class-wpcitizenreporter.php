@@ -97,6 +97,12 @@ class WPCitizenReporter {
 	private function load_dependencies() {
 
 		/**
+		 * Control login. Only admins allowed
+		 */
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/control_login.php';
+
+		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
@@ -190,6 +196,7 @@ class WPCitizenReporter {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$dashboard_plugin = new WPCitizenReporter_Dashboard();
+
 		//create summary widget
 		//$this->loader->add_action('admin_notices', $dashboard_plugin, 'summary_widget');
 		//remove default widgets
