@@ -127,7 +127,7 @@ class JSON_API_CR_Controller {
 
             // Set the role
             $user = new WP_User( $user_id );
-            $user->set_role( 'author' );
+            $user->set_role( 'editor' );
             // Add meta
             //update_user_meta($user_id, 'location', $_POST['location']);
             //update_user_meta($user_id, 'phone_number', $_POST['phone_number']);
