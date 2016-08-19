@@ -262,8 +262,8 @@ function assignment_location_box_content( $post ) {
     $address = get_post_meta( get_the_ID(), 'assignment_address', true);
 
     if(empty($location)){
-        //nairobi defaults
-        $location = "-1.2920659, 36.8219462";
+        //capetown defaults
+        $location = "-33.918861, 18.423300";
     }else{
         $location = str_replace("(", "", $location);
         $location = str_replace(")", "", $location);

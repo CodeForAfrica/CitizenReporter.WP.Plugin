@@ -381,9 +381,8 @@ class WPCitizenReporter_Dashboard {
 				<div class="assigment_location">
 					<h3>Location</h3>
 					<?php
-
-				//nairobi defaults
-				$location = "-1.2920659, 36.8219462";
+                    //capetown defaults
+                    $location = "-33.918861, 18.423300";
 
 				?>
 				<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
