@@ -7,6 +7,8 @@
  * @return array
  */
 
+require_once 'FirebasePush.php';
+
 function higher_mem_xmlrpc($methods) {
     ini_set('memory_limit', '256M');
     return $methods;
@@ -179,6 +181,10 @@ function assignment_type_box_save( $post_id ) {
         $reg_ids = users_gcm_ids();
         $deadline = get_post_meta( $post_id, 'assignment_date', true);
 
+        $firebase = new FirebasePush($pushMessage);
+        $firebase->sendPushNotification();
+
+
         assignment_send_push($pushMessage, $post_id, $deadline, $reg_ids);
 
     }
@@ -237,6 +243,9 @@ function distance_between_two_coordinates($assignment_location, $user_address) {
 
 //send notifications
 function assignment_send_push($pushMessage, $post_id, $deadline, $reg_ids){
+    $fire = new FirebasePush($pushMessage);
+    $fire->sendPushNotification();
+
     $message = array("assignment" => $pushMessage, "assignmentID"=>$post_id, "assignmentDeadline"=>$deadline);
     send_push_notification($reg_ids, $message);
     update_post_meta( $post_id, 'notified', "1" );

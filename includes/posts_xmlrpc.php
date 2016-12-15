@@ -1,38 +1,38 @@
 <?php
-
 /**
- * Retrieve user's list of recent posts.
- *
- * @since 1.0.2
- *
- * @param array $args {
- *     Method arguments. Note: arguments must be ordered as documented.
- *
- * @type int $blog_id (unused)
- * @type string $username
- * @type string $password
- * @type int $numberposts
- * }
- * @return array|IXR_Error
+ * Created by PhpStorm.
+ * User: Ahereza
+ * Date: 11/30/16
+ * Time: 08:32
  */
 
+/**
+ * Dynamically increase allowed memory limit for XML-RPC only.
+ *
+ * @param array $methods
+ * @return array
+ */
 
-add_filter('xmlrpc_methods', 'citizenReporter_new_xmlrpc_methods');
+function higher_mem_xmlrpc($methods) {
+    ini_set('memory_limit', '256M');
+    return $methods;
+}
+add_action('xmlrpc_methods', 'higher_mem_xmlrpc');
 
-function citizenReporter_new_xmlrpc_methods($methods)
+//xmlrpc stuff
+
+add_filter('xmlrpc_methods', 'my_xmlrpc_methods19');
+function my_xmlrpc_methods19($methods)
 {
-    $methods['citizenReporter.getRecentPostsUser'] = 'citizenReporter_getRecentPostsUser';
+    $methods['metaWeblog.getRecentPostsUser'] = 'mw_getRecentPostsUser';
     return $methods;
 }
 
-function citizenReporter_getRecentPostsUser($args)
-{
-
-    $recent_posts = array();
-
-    //$this->escape( $args );
+function mw_getRecentPostsUser($args) {
     global $wp_xmlrpc_server;
     $wp_xmlrpc_server->escape($args);
+
+    $recent_posts = array();
 
     $username = $args[1];
     $password = $args[2];
@@ -138,27 +138,3 @@ function citizenReporter_getRecentPostsUser($args)
 
     return $recent_posts;
 }
-
-
-function mynamespace_getUserID($args)
-{
-    global $wp_xmlrpc_server;
-    $wp_xmlrpc_server->escape($args);
-
-    $blog_id = $args[0];
-    $username = $args[1];
-    $password = $args[2];
-
-    if (!$user = $wp_xmlrpc_server->login($username, $password))
-        return $wp_xmlrpc_server->error;
-
-    return $user->ID;
-}
-
-function mynamespace_new_xmlrpc_methods($methods)
-{
-    $methods['mynamespace.getUserID'] = 'mynamespace_getUserID';
-    return $methods;
-}
-
-add_filter('xmlrpc_methods', 'mynamespace_new_xmlrpc_methods');
