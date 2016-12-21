@@ -38,7 +38,7 @@ class FirebasePush
 
         $headers = array
         (
-            'Authorization: key=' . API_ACCESS_KEY,
+            'Authorization: key=' . "AIzaSyA_WcsHwGxnKO7mThNuYaoXHhVoqBb4kiA",
             'Content-Type: application/json'
         );
 

@@ -555,7 +555,7 @@ function assignment_date_box_content( $post ) {
     wp_nonce_field( plugin_basename( __FILE__ ), 'assignment_date_box_content_nonce' );
     $date = get_post_meta( get_the_ID(), 'assignment_date', true);
 
-    echo '<input type="date" id="assignment_date" name="assignment_date"  value="'.$date.'"/>';
+    echo '<input type="date" id="assignment_date" name="assignment_date" placeholder="YYYY-MM-DD" value="'.$date.'"/>';
     print "<br /> Leave blank if open ended*";
 }
 add_action( 'save_post', 'assignment_date_box_save' );
