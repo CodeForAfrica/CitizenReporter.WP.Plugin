@@ -87,7 +87,18 @@ class JSON_API_CR_Controller {
         return array("result"=>"OK", "message"=>"Profile updated successfully!");
     }
 
+//    public function get_user(){
+//        $email = $_POST['email'];
+//        $user = get_user_by("email", $email);
+//
+//    }
+
     public function register(){
+        $post = "";
+        foreach ($_POST as $key => $entry)
+        {
+            $post . $key . ": " . $entry . ",";
+        }
         global $json_api;
 
         $username = $_POST['username'];
@@ -100,7 +111,7 @@ class JSON_API_CR_Controller {
         //$lastname = $_POST['lastname'];
         $key = $_POST['key'];
         if(!isset($username)||(!$password)){
-            return array("result"=>"NOK", "message"=>"missing required fields!");
+            return array("result"=>"NOK", "message"=>"missing required fields!", "username"=>$username, "password"=>$password, "post_de"=>$post);
         }
 
         if( null == username_exists( $username ) ) {
@@ -147,9 +158,10 @@ class JSON_API_CR_Controller {
         //	   if($key!=get_site_option('api_key')){
 //	      return array("result"=>"NOK", "message"=>"Incorrect API key!");}
 //	   else{
-        $user = get_user_by( "login", $username );
+        $user = get_user_by( "email", $username );
         $user_id = $user->ID;
         $p = array();
+        $p['user_id'] = $user_id;
         $p['username'] = get_userdata($user_id)->user_login;
         $p['password'] = get_user_meta($user_id, 'password', TRUE);
         $p['email'] = get_userdata($user_id)->user_email;;
@@ -161,6 +173,17 @@ class JSON_API_CR_Controller {
 
         return array("result"=>"OK", "user"=>$p);
 //	  }
+    }
+
+    public function get_associated_blogs(){
+        global $json_api;
+        $username = $_POST['username'];
+        $user = get_user_by( "email", $username );
+        $user_id = $user->ID;
+
+        $user_blogs = get_blogs_of_user( $user_id );
+
+        return array(["result"=>"OK", "blogs"=> $user_blogs]);
     }
 
 
