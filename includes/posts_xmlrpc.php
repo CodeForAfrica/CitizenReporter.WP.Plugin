@@ -13,20 +13,9 @@
  * @return array
  */
 
-function higher_mem_xmlrpc($methods) {
-    ini_set('memory_limit', '256M');
-    return $methods;
-}
-add_action('xmlrpc_methods', 'higher_mem_xmlrpc');
-
 //xmlrpc stuff
 
-add_filter('xmlrpc_methods', 'my_xmlrpc_methods19');
-function my_xmlrpc_methods19($methods)
-{
-    $methods['metaWeblog.getRecentPostsUser'] = 'mw_getRecentPostsUser';
-    return $methods;
-}
+
 
 function mw_getRecentPostsUser($args) {
     global $wp_xmlrpc_server;
@@ -41,8 +30,10 @@ function mw_getRecentPostsUser($args) {
     else
         $query = array();
 
-    if (!$user = $this->login($username, $password))
-        return $this->error;
+
+    if ( !$user = $wp_xmlrpc_server->login($username, $password) ) {
+        return $wp_xmlrpc_server->error;
+    }
 
     if (!current_user_can('edit_posts'))
         return new IXR_Error(401, __('Sorry, you cannot edit posts on this site.'));
@@ -52,6 +43,7 @@ function mw_getRecentPostsUser($args) {
 
     $posts_list = wp_get_recent_posts($query);
 
+
     if (!$posts_list)
         return array();
 
@@ -59,10 +51,10 @@ function mw_getRecentPostsUser($args) {
         if (!current_user_can('edit_post', $entry['ID']))
             continue;
 
-        $post_date = $this->_convert_date($entry['post_date']);
-        $post_date_gmt = $this->_convert_date_gmt($entry['post_date_gmt'], $entry['post_date']);
-        $post_modified = $this->_convert_date($entry['post_modified']);
-        $post_modified_gmt = $this->_convert_date_gmt($entry['post_modified_gmt'], $entry['post_modified']);
+        $post_date = _convert_date($entry['post_date']);
+        $post_date_gmt = _convert_date_gmt($entry['post_date_gmt'], $entry['post_date']);
+        $post_modified = _convert_date($entry['post_modified']);
+        $post_modified_gmt = _convert_date_gmt($entry['post_modified_gmt'], $entry['post_modified']);
 
         $categories = array();
         $catids = wp_get_post_categories($entry['ID']);
@@ -98,8 +90,12 @@ function mw_getRecentPostsUser($args) {
         if (empty($post_format))
             $post_format = 'standard';
 
-        $user = get_user_by('login', $username);
+        // $user = get_user_by('login', $username);
+        // $user_ID = $user->ID;
+
+        $user = wp_get_current_user();
         $user_ID = $user->ID;
+
 
         if ($user_ID == $entry['post_author']) {
 
@@ -126,7 +122,7 @@ function mw_getRecentPostsUser($args) {
                 'wp_author_display_name' => $author->display_name,
                 'date_created_gmt' => $post_date_gmt,
                 'post_status' => $entry['post_status'],
-                'custom_fields' => $this->get_custom_fields($entry['ID']),
+                'custom_fields' => $wp_xmlrpc_server->get_custom_fields($entry['ID']),
                 'wp_post_format' => $post_format,
                 'date_modified' => $post_modified,
                 'date_modified_gmt' => $post_modified_gmt,
@@ -138,3 +134,11 @@ function mw_getRecentPostsUser($args) {
 
     return $recent_posts;
 }
+
+function my_xmlrpc_methods19($methods)
+{
+    $methods['metaWeblog.getRecentPostsUser'] = 'mw_getRecentPostsUser';
+    return $methods;
+}
+
+add_filter('xmlrpc_methods', 'my_xmlrpc_methods19');

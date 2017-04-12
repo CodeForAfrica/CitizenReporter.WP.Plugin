@@ -138,27 +138,3 @@ function citizenReporter_getRecentPostsUser($args)
 
     return $recent_posts;
 }
-
-
-function mynamespace_getUserID($args)
-{
-    global $wp_xmlrpc_server;
-    $wp_xmlrpc_server->escape($args);
-
-    $blog_id = $args[0];
-    $username = $args[1];
-    $password = $args[2];
-
-    if (!$user = $wp_xmlrpc_server->login($username, $password))
-        return $wp_xmlrpc_server->error;
-
-    return $user->ID;
-}
-
-function mynamespace_new_xmlrpc_methods($methods)
-{
-    $methods['mynamespace.getUserID'] = 'mynamespace_getUserID';
-    return $methods;
-}
-
-add_filter('xmlrpc_methods', 'mynamespace_new_xmlrpc_methods');
