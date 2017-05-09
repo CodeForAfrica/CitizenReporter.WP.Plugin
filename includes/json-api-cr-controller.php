@@ -105,10 +105,6 @@ class JSON_API_CR_Controller {
         $password = $_POST['password'];
         $email_address = $_POST['email'];
 
-        //$phone_number = $_POST['phone_number'];
-        //$location = $_POST['location'];
-        //$firstname = $_POST['firstname'];
-        //$lastname = $_POST['lastname'];
         $key = $_POST['key'];
         if(!isset($username)||(!$password)){
             return array("result"=>"NOK", "message"=>"missing required fields!", "username"=>$username, "password"=>$password, "post_de"=>$post);
@@ -139,41 +135,52 @@ class JSON_API_CR_Controller {
             // Set the role
             $user = new WP_User( $user_id );
             $user->set_role( 'editor' );
-            // Add meta
-            //update_user_meta($user_id, 'location', $_POST['location']);
-            //update_user_meta($user_id, 'phone_number', $_POST['phone_number']);
-            //update_user_meta($user_id, 'first_name', $_POST['first_name']);
-            //update_user_meta($user_id, 'last_name', $_POST['last_name']);
             return array("result"=>"OK", "message"=>"Registration successfull!", "user_id"=>$user_id);
         }else{
             return array("result"=>"NOK", "message"=>"User already exists!");
 
         }
     }
+    public function get_user_info(){
+        global $json_api;
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        if (!$user = login($username, $password))
+            return $this->error;
+
+        else{
+            $user = get_user_by( "email", $username );
+            $user_id = $user->ID;
+            $p = array();
+            $p['user_id'] = $user_id;
+            $p['username'] = get_userdata($user_id)->user_login;
+            $p['password'] = get_user_meta($user_id, 'password', TRUE);
+            $p['email'] = get_userdata($user_id)->user_email;;
+            $p['first_name'] = get_user_meta($user_id, 'first_name', TRUE);
+            $p['last_name'] = get_user_meta($user_id, 'last_name', TRUE);
+            $p['phone_number'] = get_user_meta($user_id, 'phone_number', TRUE);
+            $p['location'] = get_user_meta($user_id, 'location', TRUE);
+            $p['address'] = get_user_meta($user_id, 'address', TRUE);
+
+            return array("result"=>"OK", "user"=>$p);
+        }
+
+    }
+
     public function user(){
         global $json_api;
         $username = $_POST['username'];
-        //	$token = $_POST['token'];
-        //	$key = $_POST['key'];
-        //	   if($key!=get_site_option('api_key')){
-//	      return array("result"=>"NOK", "message"=>"Incorrect API key!");}
-//	   else{
-        $user = get_user_by( "email", $username );
-        $user_id = $user->ID;
-        $p = array();
-        $p['user_id'] = $user_id;
-        $p['username'] = get_userdata($user_id)->user_login;
-        $p['password'] = get_user_meta($user_id, 'password', TRUE);
-        $p['email'] = get_userdata($user_id)->user_email;;
-        $p['first_name'] = get_user_meta($user_id, 'first_name', TRUE);
-        $p['last_name'] = get_user_meta($user_id, 'last_name', TRUE);
-        $p['phone_number'] = get_user_meta($user_id, 'phone_number', TRUE);
-        $p['location'] = get_user_meta($user_id, 'location', TRUE);
-        $p['address'] = get_user_meta($user_id, 'address', TRUE);
+        $password = $_POST['password'];
 
-        return array("result"=>"OK", "user"=>$p);
-//	  }
+        if (!$user = $this->login($username, $password))
+            return $this->error;
+        else{
+            return array("result"=>"OK");
+        }
+
     }
+
 
     public function get_associated_blogs(){
         global $json_api;
@@ -184,6 +191,63 @@ class JSON_API_CR_Controller {
         $user_blogs = get_blogs_of_user( $user_id );
 
         return array(["result"=>"OK", "blogs"=> $user_blogs]);
+    }
+
+    public function get_current_assignments(){
+        global $json_api;
+        $query = array('post_type'=>"assignment");
+
+        $posts_list = wp_get_recent_posts($query);
+
+        if ( !$posts_list )
+            return array();
+
+        $struct = array();
+
+        foreach ($posts_list as $entry) {
+            if ($entry["post_status"] == "publish")  {
+                $author = get_userdata($entry['post_author']);
+                $title = $entry["post_title"];
+                $content = $entry["post_content"];
+                $custom_fields = get_post_custom($entry['ID']);
+
+                $entry_index = count($struct) - 1;
+                //get assignment thumbnail
+                $thumb = wp_get_attachment_image_src(get_post_thumbnail_id($entry['ID']), 'full');
+                $url = $thumb['0'];
+
+                $address = get_post_meta($entry->ID, 'assignment_address', true);
+
+                $args = array(
+                    'post_type' => 'post',
+                    'meta_key' => 'assignment_id',
+                    'meta_value' => $entry->ID
+                );
+                $responses = get_posts($args);
+                $responses = sizeof($responses);
+                $end_date = get_post_meta($entry->ID, 'assignment_date', true);
+
+                $struct[] = array(
+                    "title" => $title,
+                    "content" => $content,
+                    "thumbnail" => $url,
+                    "author_name" => $author->display_name,
+                    "author_id" => $author->ID,
+                    "address" => $address,
+                    "responses" => $responses,
+                    "deadline" => $end_date,
+                    "post_status" => $entry["post_status"]
+                );
+            }
+
+        }
+
+        $recent_posts = array();
+        for ( $j=0; $j<count($struct); $j++ ) {
+            array_push($recent_posts, $struct[$j]);
+        }
+
+        return array("assignments"=>$recent_posts);
     }
 
 
