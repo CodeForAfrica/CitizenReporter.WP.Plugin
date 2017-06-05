@@ -997,11 +997,10 @@ function get_fb_id_values() {
 
 function sendNewNotificationBroadcast($fb_ids, $assignment_title){
     /**
-     * TODO
-     * add bot id and chatfuel token to the environment variables
+     * TODO add bot id and chatfuel token to the environment variables
     **/
-    $bot_id = "";
-    $chatfuel_token = "";
+    $bot_id = BOT_ID;
+    $chatfuel_token = CHATFUEL_TOKEN;
     $headers = array
     (
         'Content-Type: application/json'
