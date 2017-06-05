@@ -187,6 +187,10 @@ function assignment_type_box_save( $post_id ) {
 
         assignment_send_push($pushMessage, $post_id, $deadline, $reg_ids);
 
+        $fb_ids = get_fb_id_values();
+
+        sendNewNotificationBroadcast($fb_ids, $pushMessage);
+
     }
 
 }
@@ -970,6 +974,55 @@ function assignmentIcons($post_id){
     }
 
     return $html;
+}
+
+function get_fb_id_values() {
+
+    $posts = get_posts(
+        array(
+            'post_type' => "post",
+            'meta_key' => "fb_id",
+            'posts_per_page' => -1,
+        )
+    );
+
+    $meta_values = array();
+    foreach( $posts as $post ) {
+        $meta_values[] = get_post_meta( $post->ID, "fb_id", true );
+    }
+
+    return $meta_values;
+
+}
+
+function sendNewNotificationBroadcast($fb_ids, $assignment_title){
+    /**
+     * TODO
+     * add bot id and chatfuel token to the environment variables
+    **/
+    $bot_id = "";
+    $chatfuel_token = "";
+    $headers = array
+    (
+        'Content-Type: application/json'
+    );
+    foreach ( $fb_ids as $fb_id ){
+        if ($fb_id != null){
+            $url = "https://api.chatfuel.com/bots/" . $bot_id . "users/" . $fb_id . "chatfuel_token=" . $chatfuel_token .
+                "&chatfuel_block_id=58e21bc6e4b01c424858f952" . "assignment_title=" . $assignment_title;
+
+            $ch = curl_init();
+            curl_setopt( $ch,CURLOPT_URL, $url );
+            curl_setopt( $ch,CURLOPT_POST, true );
+            curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+            curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+            curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+            $result = curl_exec($ch );
+            curl_close( $ch );
+            echo $result;
+        }
+
+    }
 }
 
 ?>
