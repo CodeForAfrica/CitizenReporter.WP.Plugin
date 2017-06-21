@@ -667,6 +667,22 @@ function mw_getRecentAssignments($args) {
         $post_modified = _convert_date( $entry['post_modified'] );
         $post_modified_gmt = _convert_date_gmt( $entry['post_modified_gmt'], $entry['post_modified'] );
 
+        $today = strtotime(date("Y-m-d H:i:s"));
+
+        $custom_fields = $wp_xmlrpc_server->get_custom_fields($entry['ID']);
+        $deadline = strtotime(get_post_meta( $entry['ID'], 'assignment_date', true));
+        $deadline_string = get_post_meta( $entry['ID'], 'assignment_date', true);
+        if ($deadline_string == ''){
+            $deadline = $today + 1000000000;
+        }
+
+
+
+        if ($deadline < $today)
+            continue;
+
+
+
         $categories = array();
         $catids = wp_get_post_categories($entry['ID']);
         foreach( $catids as $catid )
@@ -688,7 +704,7 @@ function mw_getRecentAssignments($args) {
 
         // Get the post author info.
         $author = get_userdata($entry['post_author']);
-	$author_email = $author->user_email;
+	    $author_email = $author->user_email;
 
         $allow_comments = ('open' == $entry['comment_status']) ? 1 : 0;
         $allow_pings = ('open' == $entry['ping_status']) ? 1 : 0;
@@ -705,6 +721,7 @@ function mw_getRecentAssignments($args) {
         $struct[] = array(
 
             'dateCreated' => $post_date,
+            'deadline' => $deadline - $today,
             'userid' => $entry['post_author'],
             'postid' => (string) $entry['ID'],
             'description' => $post['main'],
@@ -726,11 +743,12 @@ function mw_getRecentAssignments($args) {
             'wp_author_display_name' => $author->display_name,
             'date_created_gmt' => $post_date_gmt,
             'post_status' => $entry['post_status'],
-            'custom_fields' => $wp_xmlrpc_server->get_custom_fields($entry['ID']),
+            'custom_fields' => $custom_fields,
             'wp_post_format' => $post_format,
             'date_modified' => $post_modified,
             'date_modified_gmt' => $post_modified_gmt,
             'sticky' => ( $entry['post_type'] === 'post' && is_sticky( $entry['ID'] ) ),
+
 
         );
 
