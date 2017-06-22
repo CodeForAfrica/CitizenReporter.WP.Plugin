@@ -171,12 +171,26 @@ class JSON_API_CR_Controller {
     public function user(){
         global $json_api;
         $username = $_POST['username'];
-        $password = $_POST['password'];
 
-        if (!$user = $this->login($username, $password))
+        $user = get_user_by("email", $username);
+
+        $user_id = $user->ID;
+        $p = array();
+        $p['avatar'] = get_avatar_url($user_id);
+        $p['user_id'] = $user_id;
+        $p['username'] = get_userdata($user_id)->user_login;
+        $p['password'] = get_user_meta($user_id, 'password', TRUE);
+        $p['email'] = get_userdata($user_id)->user_email;;
+        $p['first_name'] = get_user_meta($user_id, 'first_name', TRUE);
+        $p['last_name'] = get_user_meta($user_id, 'last_name', TRUE);
+        $p['phone_number'] = get_user_meta($user_id, 'phone_number', TRUE);
+        $p['location'] = get_user_meta($user_id, 'location', TRUE);
+        $p['address'] = get_user_meta($user_id, 'address', TRUE);
+
+        if (!$user)
             return $this->error;
         else{
-            return array("result"=>"OK");
+            return array("result"=>"OK", "user"=>$p);
         }
 
     }
